@@ -265,6 +265,83 @@
     @media (max-width: 640px) {
       .nav-link { font-size: 10px; letter-spacing: 0.06em; }
     }
+
+    /* ─── Bouton de connexion Discord ─── */
+.discord-login-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: #888888;
+  border: 1px solid #252525;
+  padding: 7px 14px;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  cursor: pointer; background: transparent;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.discord-login-btn:hover {
+  color: #e8e8e8;
+  border-color: #5a5a5a;
+  background: #161616;
+}
+
+/* ─── Profil Discord connecté ─── */
+.discord-profile {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: 'JetBrains Mono', monospace;
+  border: 1px solid #252525;
+  padding: 5px 12px 5px 6px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  flex-shrink: 0;
+  background: transparent;
+  position: relative;
+}
+.discord-profile:hover {
+  border-color: #5a5a5a;
+  background: #161616;
+}
+.discord-profile img {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  display: block;
+  border: 1px solid #3a3a3a;
+}
+.discord-profile-name {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: #c0c0c0;
+  max-width: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ─── Menu déroulant déconnexion ─── */
+.discord-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: #111111;
+  border: 1px solid #252525;
+  min-width: 150px;
+  z-index: 60;
+  display: none;
+}
+.discord-dropdown.open { display: block; }
+.discord-dropdown-item {
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: #888888;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+}
+.discord-dropdown-item:hover {
+  color: #e8e8e8;
+  background: #161616;
+}
   </style>
 </head>
 
@@ -289,13 +366,16 @@
       </div>
 
       <!-- Menu de navigation principal -->
-      <nav class="flex items-center gap-5 sm:gap-8">
-        <span class="nav-link active" data-page="home"    onclick="showPage('home')">Accueil</span>
-        <span class="nav-link"        data-page="team"    onclick="showPage('team')">Informations</span>
-        <span class="nav-link"        data-page="contact" onclick="showPage('contact')">Contact</span>
-        <span class="nav-link"        data-page="shop"    onclick="showPage('shop')">Boutique</span>
-        <span class="nav-link"        data-page="wiki"    onclick="showPage('wiki')">Wiki</span>
-      </nav>
+     <nav class="flex items-center gap-5 sm:gap-8">
+  <span class="nav-link active" data-page="home"    onclick="showPage('home')">Accueil</span>
+  <span class="nav-link"        data-page="team"    onclick="showPage('team')">Informations</span>
+  <span class="nav-link"        data-page="contact" onclick="showPage('contact')">Contact</span>
+  <span class="nav-link"        data-page="shop"    onclick="showPage('shop')">Boutique</span>
+  <span class="nav-link"        data-page="wiki"    onclick="showPage('wiki')">Wiki</span>
+
+  <!-- DISCORD AUTHENTICATOR -->
+  <div id="discord-auth-container"></div>
+</nav>
 
     </div>
   </header>
@@ -818,11 +898,109 @@
     }
 
     // ── Initialisation au chargement ──
-    document.addEventListener('DOMContentLoaded', () => {
-      // Réinitialiser les icônes après le rendu complet
-      lucide.createIcons();
-    });
+document.addEventListener('DOMContentLoaded', () => {
+  lucide.createIcons();
+  checkDiscordAuthCallback();   // ← ligne à ajouter
+});
   </script>
+
+<script>
+  // ─── Configuration Discord OAuth2 ───
+  const DISCORD_CLIENT_ID = '1518275854411497552';
+  // ⚠️ Remplace par ton URL réelle une fois ta fonction serverless déployée
+  const DISCORD_REDIRECT_URI = window.location.origin + '/api/discord-callback';
+  const DISCORD_OAUTH_SCOPE = 'identify';
+  const DISCORD_STORAGE_KEY = 'ayinvox_discord_user';
+
+  function discordLogin() {
+    const params = new URLSearchParams({
+      client_id: DISCORD_CLIENT_ID,
+      redirect_uri: DISCORD_REDIRECT_URI,
+      response_type: 'code',
+      scope: DISCORD_OAUTH_SCOPE,
+    });
+    window.location.href = `https://discord.com/api/oauth2/authorize?${params.toString()}`;
+  }
+
+  function discordLogout() {
+    sessionStorage.removeItem(DISCORD_STORAGE_KEY);
+    renderDiscordAuthUI();
+  }
+
+  function toggleDiscordDropdown(event) {
+    event.stopPropagation();
+    const dropdown = document.getElementById('discord-dropdown');
+    if (dropdown) dropdown.classList.toggle('open');
+  }
+
+  document.addEventListener('click', (event) => {
+    const dropdown = document.getElementById('discord-dropdown');
+    const profile = document.getElementById('discord-profile-btn');
+    if (dropdown && profile && !profile.contains(event.target)) {
+      dropdown.classList.remove('open');
+    }
+  });
+
+  function renderDiscordAuthUI() {
+    const container = document.getElementById('discord-auth-container');
+    if (!container) return;
+
+    const stored = sessionStorage.getItem(DISCORD_STORAGE_KEY);
+
+    if (stored) {
+      let user;
+      try {
+        user = JSON.parse(stored);
+      } catch (e) {
+        sessionStorage.removeItem(DISCORD_STORAGE_KEY);
+        renderDiscordAuthUI();
+        return;
+      }
+
+      container.innerHTML = `
+        <div class="discord-profile" id="discord-profile-btn" onclick="toggleDiscordDropdown(event)">
+          <img src="${user.avatar}" alt="${user.username}" />
+          <span class="discord-profile-name">${user.username}</span>
+          <div class="discord-dropdown" id="discord-dropdown">
+            <div class="discord-dropdown-item" onclick="discordLogout()">
+              <i data-lucide="log-out" class="w-3 h-3"></i> Déconnexion
+            </div>
+          </div>
+        </div>
+      `;
+    } else {
+      container.innerHTML = `
+        <span class="discord-login-btn" onclick="discordLogin()">
+          <i data-lucide="message-circle" class="w-3.5 h-3.5"></i> Connexion Discord
+        </span>
+      `;
+    }
+
+    if (window.lucide) lucide.createIcons();
+  }
+
+  function checkDiscordAuthCallback() {
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.get('discord_auth') === 'success') {
+      const username = params.get('username');
+      const avatar = params.get('avatar');
+      const id = params.get('id');
+
+      if (username && avatar) {
+        sessionStorage.setItem(
+          DISCORD_STORAGE_KEY,
+          JSON.stringify({ username, avatar, id })
+        );
+      }
+
+      const cleanUrl = window.location.origin + window.location.pathname;
+      window.history.replaceState({}, document.title, cleanUrl);
+    }
+
+    renderDiscordAuthUI();
+  }
+</script>
 
 </body>
 </html>
