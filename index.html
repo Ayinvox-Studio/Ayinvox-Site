@@ -907,99 +907,118 @@ document.addEventListener('DOMContentLoaded', () => {
 <script>
   // ─── Configuration Discord OAuth2 ───
 const DISCORD_CLIENT_ID = '1518275854411497552';
-// Utilise l'origine exacte de votre page GitHub Pages
+// Calcule automatiquement https://ayinvox-studio.github.io/Ayinvox-Site/
 const DISCORD_REDIRECT_URI = window.location.origin + window.location.pathname;
 const DISCORD_OAUTH_SCOPE = 'identify';
 const DISCORD_STORAGE_KEY = 'ayinvox_discord_user';
 
-  function discordLogin() {
-    const params = new URLSearchParams({
-      client_id: DISCORD_CLIENT_ID,
-      redirect_uri: DISCORD_REDIRECT_URI,
-      response_type: 'code',
-      scope: DISCORD_OAUTH_SCOPE,
-    });
-    window.location.href = `https://discord.com/api/oauth2/authorize?${params.toString()}`;
-  }
-
-  function discordLogout() {
-    sessionStorage.removeItem(DISCORD_STORAGE_KEY);
-    renderDiscordAuthUI();
-  }
-
-  function toggleDiscordDropdown(event) {
-    event.stopPropagation();
-    const dropdown = document.getElementById('discord-dropdown');
-    if (dropdown) dropdown.classList.toggle('open');
-  }
-
-  document.addEventListener('click', (event) => {
-    const dropdown = document.getElementById('discord-dropdown');
-    const profile = document.getElementById('discord-profile-btn');
-    if (dropdown && profile && !profile.contains(event.target)) {
-      dropdown.classList.remove('open');
-    }
+function discordLogin() {
+  const params = new URLSearchParams({
+    client_id: DISCORD_CLIENT_ID,
+    redirect_uri: DISCORD_REDIRECT_URI,
+    response_type: 'token', // 👈 Modifié en 'token' pour que GitHub Pages puisse gérer l'auth sans serveur
+    scope: DISCORD_OAUTH_SCOPE,
   });
+  window.location.href = `https://discord.com/api/oauth2/authorize?${params.toString()}`;
+}
 
-  function renderDiscordAuthUI() {
-    const container = document.getElementById('discord-auth-container');
-    if (!container) return;
+function discordLogout() {
+  sessionStorage.removeItem(DISCORD_STORAGE_KEY);
+  renderDiscordAuthUI();
+}
 
-    const stored = sessionStorage.getItem(DISCORD_STORAGE_KEY);
+function toggleDiscordDropdown(event) {
+  event.stopPropagation();
+  const dropdown = document.getElementById('discord-dropdown');
+  if (dropdown) dropdown.classList.toggle('open');
+}
 
-    if (stored) {
-      let user;
-      try {
-        user = JSON.parse(stored);
-      } catch (e) {
-        sessionStorage.removeItem(DISCORD_STORAGE_KEY);
-        renderDiscordAuthUI();
-        return;
-      }
+document.addEventListener('click', (event) => {
+  const dropdown = document.getElementById('discord-dropdown');
+  const profile = document.getElementById('discord-profile-btn');
+  if (dropdown && profile && !profile.contains(event.target)) {
+    dropdown.classList.remove('open');
+  }
+});
 
-      container.innerHTML = `
-        <div class="discord-profile" id="discord-profile-btn" onclick="toggleDiscordDropdown(event)">
-          <img src="${user.avatar}" alt="${user.username}" />
-          <span class="discord-profile-name">${user.username}</span>
-          <div class="discord-dropdown" id="discord-dropdown">
-            <div class="discord-dropdown-item" onclick="discordLogout()">
-              <i data-lucide="log-out" class="w-3 h-3"></i> Déconnexion
-            </div>
+function renderDiscordAuthUI() {
+  const container = document.getElementById('discord-auth-container');
+  if (!container) return;
+
+  const stored = sessionStorage.getItem(DISCORD_STORAGE_KEY);
+
+  if (stored) {
+    let user;
+    try {
+      user = JSON.parse(stored);
+    } catch (e) {
+      sessionStorage.removeItem(DISCORD_STORAGE_KEY);
+      renderDiscordAuthUI();
+      return;
+    }
+
+    container.innerHTML = `
+      <div class="discord-profile" id="discord-profile-btn" onclick="toggleDiscordDropdown(event)">
+        <img src="${user.avatar}" alt="${user.username}" style="width:24px; height:24px; border-radius:50%;" />
+        <span class="discord-profile-name">${user.username}</span>
+        <div class="discord-dropdown" id="discord-dropdown">
+          <div class="discord-dropdown-item" onclick="discordLogout()">
+            <i data-lucide="log-out" class="w-3 h-3"></i> Déconnexion
           </div>
         </div>
-      `;
-    } else {
-      container.innerHTML = `
-        <span class="discord-login-btn" onclick="discordLogin()">
-          <i data-lucide="message-circle" class="w-3.5 h-3.5"></i> Connexion Discord
-        </span>
-      `;
-    }
-
-    if (window.lucide) lucide.createIcons();
+      </div>
+    `;
+  } else {
+    container.innerHTML = `
+      <span class="discord-login-btn" onclick="discordLogin()" style="cursor:pointer;">
+        <i data-lucide="message-circle" class="w-3.5 h-3.5"></i> Connexion Discord
+      </span>
+    `;
   }
 
-  function checkDiscordAuthCallback() {
-    const params = new URLSearchParams(window.location.search);
+  if (window.lucide) lucide.createIcons();
+}
 
-    if (params.get('discord_auth') === 'success') {
-      const username = params.get('username');
-      const avatar = params.get('avatar');
-      const id = params.get('id');
+function checkDiscordAuthCallback() {
+  // Discord renvoie le token après un hashtag (#access_token=...) et non un point d'interrogation
+  const fragment = new URLSearchParams(window.location.hash.slice(1));
+  const accessToken = fragment.get('access_token');
 
-      if (username && avatar) {
+  if (accessToken) {
+    // On efface immédiatement le token de l'URL pour que ce soit propre visuellement
+    window.history.replaceState({}, document.title, window.location.origin + window.location.pathname);
+
+    // On appelle directement l'API de Discord avec le token pour récupérer le pseudo et l'avatar
+    fetch('https://discord.com/api/users/@me', {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.id && data.username) {
+        // Construction de l'URL de l'avatar Discord (ou avatar par défaut si l'utilisateur n'en a pas)
+        const avatarUrl = data.avatar 
+          ? `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png`
+          : `https://cdn.discordapp.com/embed/avatars/${data.discriminator % 5}.png`;
+
         sessionStorage.setItem(
           DISCORD_STORAGE_KEY,
-          JSON.stringify({ username, avatar, id })
+          JSON.stringify({ 
+            username: data.username, 
+            avatar: avatarUrl, 
+            id: data.id 
+          })
         );
+        renderDiscordAuthUI();
       }
-
-      const cleanUrl = window.location.origin + window.location.pathname;
-      window.history.replaceState({}, document.title, cleanUrl);
-    }
-
+    })
+    .catch(err => console.error("Erreur lors de la récupération du profil Discord:", err));
+  } else {
     renderDiscordAuthUI();
   }
+}
+
+// Lance la vérification au chargement de la page
+document.addEventListener('DOMContentLoaded', checkDiscordAuthCallback);
 </script>
 
 </body>
