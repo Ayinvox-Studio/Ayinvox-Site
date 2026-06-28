@@ -863,11 +863,11 @@
         .scp-table tr { cursor: pointer; transition: background .15s; }
         .scp-table tr:hover td { background: #111; color: #c0c0c0; }
 
-        .badge-safe     { background: #1a2e1a; color: #6db56d; border: 1px solid #2d4d2d; }
-        .badge-euclid   { background: #2e2a10; color: #c8a830; border: 1px solid #4d4218; }
-        .badge-keter    { background: #2e1010; color: #cc4444; border: 1px solid #4d1c1c; }
-        .badge-thaumiel { background: #0e1a2e; color: #4488cc; border: 1px solid #1a3050; }
-        .badge-neutralized { background: #1a1a1a; color: #888; border: 1px solid #333; }
+        .badge-g     { background: #1a2e1a; color: #6db56d; border: 1px solid #2d4d2d; }
+        .badge-y   { background: #2e2a10; color: #c8a830; border: 1px solid #4d4218; }
+        .badge-r    { background: #2e1010; color: #cc4444; border: 1px solid #4d1c1c; }
+        .badge-o { background: #2E1E10; color: #CC7844; border: 1px solid #4D311C; }
+        .badge-b { background: #11102E; color: #5244CC; border: 1px solid #1D1C4D; }
         .badge {
           display: inline-block; font-family: 'JetBrains Mono',monospace;
           font-size: 9px; letter-spacing: .08em; text-transform: uppercase;
@@ -922,11 +922,11 @@
           font-size: 15px; letter-spacing: .04em; text-transform: uppercase;
           margin-top: 5px;
         }
-        .stat-safe      { color: #6db56d; }
-        .stat-euclid    { color: #c8a830; }
-        .stat-keter     { color: #cc4444; }
-        .stat-thaumiel  { color: #4488cc; }
-        .stat-neutral   { color: #c0c0c0; }
+        .stat-g      { color: #6db56d; }
+        .stat-y    { color: #B4B56D; }
+        .stat-r     { color: #B56D6D; }
+        .stat-o  { color: #B5956D; }
+        .stat-b   { color: #776DB5; }
 
         /* ─── Mise en page deux colonnes : image / texte ─── */
         .scp-layout { display: flex; gap: 28px; flex-wrap: wrap; }
@@ -1088,7 +1088,7 @@
               Information Globale
             </button>
             <div id="sub-globale" class="wiki-sublist" style="display:none;">
-              <button class="wiki-sub-btn" onclick="wikiShowPanel('codes-alertes')">Codes d'Alertes</button>
+              <button class="wiki-sub-btn" onclick="wikiShowPanel('codes-alertes')">► Codes d'Alertes</button>
             </div>
           </div>
 
@@ -1099,7 +1099,7 @@
               Installations
             </button>
             <div id="sub-installations" class="wiki-sublist">
-              <button class="wiki-sub-btn active" onclick="wikiShowPanel('zone-ayin')">Zone-Ayin</button>
+              <button class="wiki-sub-btn active" onclick="wikiShowPanel('zone-ayin')">► Zone-Ayin  :  I.R.C</button>
             </div>
           </div>
 
@@ -1110,11 +1110,11 @@
               Départements
             </button>
             <div id="sub-departements" class="wiki-sublist" style="display:none;">
-              <button class="wiki-sub-btn" onclick="wikiShowPanel('dept-securite')">Sécurité</button>
-              <button class="wiki-sub-btn" onclick="wikiShowPanel('dept-science')">Scientifique</button>
-              <button class="wiki-sub-btn" onclick="wikiShowPanel('dept-medical')">Médical</button>
-              <button class="wiki-sub-btn" onclick="wikiShowPanel('dept-ethique')">Comité d'Éthique</button>
-              <button class="wiki-sub-btn" onclick="wikiShowPanel('fim-centre')">Centre des Forces d'Intervention Mobiles</button>
+              <button class="wiki-sub-btn" onclick="wikiShowPanel('dept-securite')">► Département de la Sécurité</button>
+              <button class="wiki-sub-btn" onclick="wikiShowPanel('dept-science')">► Département Scientifique</button>
+              <button class="wiki-sub-btn" onclick="wikiShowPanel('dept-medical')">► Département Médical</button>
+              <button class="wiki-sub-btn" onclick="wikiShowPanel('dept-admin')">► Département Administratif</button>
+              <button class="wiki-sub-btn" onclick="wikiShowPanel('fim-centre')">► Centre des Forces d'Intervention Mobiles</button>
             </div>
           </div>
 
@@ -1125,14 +1125,14 @@
               Groupes d'Intérêt
             </button>
             <div id="sub-gdi" class="wiki-sublist" style="display:none;">
-              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-chaos')">Insurrection du Chaos</button>
-              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-uiu')">UIU</button>
-              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-gendas')">Gendastrerie Nationale</button>
-              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-mcd')">Marshall, Carter & Dark</button>
-              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-eglise')">Église du Dieu Brisé</button>
-              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-anderson')">Anderson Robotics</button>
-              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-serpent')">Main du Serpent</button>
-              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-gru')">Division "P" du GRU</button>
+              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-chaos')">► L'Insurrection du Chaos</button>
+              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-uiu')">► L'Unité des Incidents Inhabituels</button>
+              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-gendas')">► La Gendastrerie Nationale</button>
+              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-mcd')">► LA Marshall, Carter & Dark</button>
+              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-eglise')">► L'Église du Dieu Brisé</button>
+              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-anderson')">► L'Anderson Robotics</button>
+              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-serpent')">► La Main du Serpent</button
+              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-gru')">► La Division "P" du GRU</button>
             </div>
           </div>
 
@@ -1263,11 +1263,11 @@
             <div class="wiki-section-header">
               <p class="wiki-breadcrumb">Installations <span>›</span> Zone-Ayin</p>
               <div class="flex items-center gap-4 mt-3">
-                <!-- LOGO INSTALLATION : remplace par <img src="logo-zone-ayin.png"> -->
+                <!-- LOGO INSTALLATION : remplace par <img src="logo-zone-ayin.png"> --> <img src="ZoneAyinLogo-removebg-preview.png">
                 <div class="entity-logo">LOGO</div>
                 <div>
-                  <h1 class="font-mono font-bold text-2xl text-bright">Zone-Ayin</h1>
-                  <p class="text-subtle text-sm mt-1">Installation de Recherche et de Confinement — France</p>
+                  <h1 class="font-mono font-bold text-2xl text-bright">ZONE - AYIN</h1>
+                  <p class="text-subtle text-sm mt-1">» Installation de Recherche et de Confinement — France</p>
                 </div>
               </div>
             </div>
@@ -1296,33 +1296,33 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr onclick="openScpModal('scp-ayin-001')">
-                        <td class="font-mono text-pale">SCP-001-AY</td>
-                        <td><span class="badge badge-keter">Keter</span></td>
-                        <td><span class="badge badge-keter">Critique</span></td>
-                        <td><span class="badge badge-keter">Amida</span></td>
-                        <td class="font-mono" style="font-size:11px;">Niveau 5</td>
+                      <tr onclick="openScpModal('scp-999')">
+                        <td class="font-mono text-pale">SCP-999</td>
+                        <td><span class="badge badge-g">Safe</span></td>
+                        <td><span class="badge badge-g">Notice</span></td>
+                        <td><span class="badge badge-g">Dark</span></td>
+                        <td class="font-mono" style="font-size:11px;">Niveau 1</td>
                       </tr>
-                      <tr onclick="openScpModal('scp-ayin-002')">
-                        <td class="font-mono text-pale">SCP-002-AY</td>
-                        <td><span class="badge badge-euclid">Euclide</span></td>
-                        <td><span class="badge badge-euclid">Modéré</span></td>
-                        <td><span class="badge badge-euclid">Vlam</span></td>
+                      <tr onclick="openScpModal('scp-131')">
+                        <td class="font-mono text-pale">SCP-131</td>
+                        <td><span class="badge badge-g">Safe</span></td>
+                        <td><span class="badge badge-g">Notice</span></td>
+                        <td><span class="badge badge-g">Dark</span></td>
+                        <td class="font-mono" style="font-size:11px;">Niveau 1</td>
+                      </tr>
+                      <tr onclick="openScpModal('scp-2950')">
+                        <td class="font-mono text-pale">SCP-2950</td>
+                        <td><span class="badge badge-g">Safe</span></td>
+                        <td><span class="badge badge-g">Notice</span></td>
+                        <td><span class="badge badge-g">Dark</span></td>
+                        <td class="font-mono" style="font-size:11px;">Niveau 1</td>
+                      </tr>
+                      <tr onclick="openScpModal('scp-093')">
+                        <td class="font-mono text-pale">SCP-093</td>
+                        <td><span class="badge badge-y">Euclid</span></td>
+                        <td><span class="badge badge-o">Danger</span></td>
+                        <td><span class="badge badge-y">Keneq</span></td>
                         <td class="font-mono" style="font-size:11px;">Niveau 3</td>
-                      </tr>
-                      <tr onclick="openScpModal('scp-ayin-003')">
-                        <td class="font-mono text-pale">SCP-003-AY</td>
-                        <td><span class="badge badge-safe">Safe</span></td>
-                        <td><span class="badge badge-safe">Faible</span></td>
-                        <td><span class="badge badge-safe">Ehbi</span></td>
-                        <td class="font-mono" style="font-size:11px;">Niveau 2</td>
-                      </tr>
-                      <tr onclick="openScpModal('scp-ayin-004')">
-                        <td class="font-mono text-pale">SCP-004-AY</td>
-                        <td><span class="badge badge-keter">Keter</span></td>
-                        <td><span class="badge badge-keter">Extrême</span></td>
-                        <td><span class="badge badge-keter">Amida</span></td>
-                        <td class="font-mono" style="font-size:11px;">Niveau 5</td>
                       </tr>
                     </tbody>
                   </table>
@@ -1769,25 +1769,21 @@
       <script>
         // ─── Base de données SCP ───
         const SCP_DATA = {
-          'scp-ayin-001': {
-            id: 'SCP-001-AY',
-            name: 'L\'Abysse Silencieux',
-            classe: { text: 'Keter', color: 'stat-keter' },
-            risk: { text: 'Critique', color: 'stat-keter' },
-            disrupt: { text: 'Amida', color: 'stat-keter' },
-            cred: 'Niveau 5',
+          'scp-999': {
+            id: 'SCP-999',
+            name: 'Le Monstre Chatouilleux',
+            classe: { text: 'Safe', color: 'stat-g' },
+            risk: { text: 'Notice', color: 'stat-g' },
+            disrupt: { text: 'Dark', color: 'stat-g' },
+            cred: 'Niveau 1',
             image: '', // ex: 'scp-001-ay.jpg'
             eventType: 'AUCUN',
             incidents: 1,
             descPoints: [
-              'Entité auditive de nature indéterminée, capable de se déplacer à travers les vibrations sonores.',
-              'Induit une paralysie cognitive irréversible chez tout individu percevant sa « fréquence signature ».',
-              'Aucun décès direct attribué — les victimes demeurent conscientes mais totalement dissociées de leur volonté.'
+              '...',
             ],
             containmentPoints: [
-              'Confinement en chambre anéchoïde de 40m³ à isolation phonique totale (classe ZÉRO-SON).',
-              'Aucune communication vocale autorisée dans un rayon de 200m.',
-              'Personnel sourd de naissance privilégié pour les interactions directes. Protocole SUNDOWN actif en permanence.'
+              '...',
             ]
           },
           'scp-ayin-002': {
