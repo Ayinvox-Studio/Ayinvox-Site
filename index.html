@@ -1116,29 +1116,25 @@
             </div>
             <div class="wiki-content-body">
               <p class="tag-class mb-3">[PRÉSENTATION]</p>
-              <p class="text-ghost text-sm leading-relaxed mb-8">Le Département de la Sécurité constitue le premier rempart contre les brèches de confinement et les menaces externes. Il supervise l'ensemble des agents de sécurité déployés dans les installations, coordonne les protocoles d'évacuation et assure la liaison opérationnelle avec les Forces d'Intervention Mobiles.</p>
+              <p class="text-ghost text-sm leading-relaxed mb-8">...</p>
 
               <p class="tag-class mb-3">[HIÉRARCHIE]</p>
               <div class="mb-8">
                 <div class="org-card">
-                  <div class="org-rank">Chef Modér.</div>
-                  <div><div class="org-name">Davlon "Fang"</div><div class="org-dept">Responsable du Département — Zone-Ayin</div></div>
+                  <div class="org-rank">DDS.</div>
+                  <div><div class="org-name">Direteur(trice) de la Sécurité</div><div class="org-dept">Responsable du Département</div></div>
                 </div>
               </div>
 
               <p class="tag-class mb-3">[DIVISIONS & SPÉCIALITÉS]</p>
               <div class="space-y-2">
-                <div class="division-card" onclick="openDivisionModal('sec-lockdown7')">
-                  <p class="text-pale text-sm font-mono">Protocole LOCKDOWN-7</p>
-                  <p class="text-subtle text-xs mt-1">Confinement total de l'installation en cas de brèche de classe Keter.</p>
+                <div class="division-card" onclick="openDivisionModal('sec-eit')">
+                  <p class="text-pale text-sm font-mono">E.I.T</p>
+                  <p class="text-subtle text-xs mt-1">L\'Equipe d\'Intervention Tactique</p>
                 </div>
-                <div class="division-card" onclick="openDivisionModal('sec-sundown')">
-                  <p class="text-pale text-sm font-mono">Protocole SUNDOWN</p>
-                  <p class="text-subtle text-xs mt-1">Évacuation prioritaire du personnel de recherche de niveau 4+.</p>
-                </div>
-                <div class="division-card" onclick="openDivisionModal('sec-veilnoir')">
-                  <p class="text-pale text-sm font-mono">Protocole VEIL-NOIR</p>
-                  <p class="text-subtle text-xs mt-1">Suppression des informations auprès des autorités civiles externes.</p>
+                <div class="division-card" onclick="openDivisionModal('sec-bse')">
+                  <p class="text-pale text-sm font-mono">B.S.E</p>
+                  <p class="text-subtle text-xs mt-1">██ ████████ ████████████ █████████</p>
                 </div>
               </div>
             </div>
@@ -1566,7 +1562,7 @@
           },
           'scp-093': {
             id: 'SCP-093',
-            name: '[DONNÉES EXPURGÉES]',
+            name: 'Objet de la Mer Rouge',
             classe: '<span class="badge badge-yellow">Euclid</span>',
             risk: '<span class="badge badge-orange">Danger</span>',
             disrupt: '<span class="badge badge-yellow">Keneq</span>',
@@ -1580,9 +1576,8 @@
         // ─── Base de données Divisions / Hiérarchies (départements, FIM, GdI) ───
         const DIVISION_DATA = {
           // Sécurité
-          'sec-lockdown7': { name: 'Protocole LOCKDOWN-7', image:'', presentation: 'Protocole de confinement total déclenché automatiquement lors d\'une brèche de classe Keter confirmée.', mission: 'Sceller intégralement l\'installation concernée, couper tous les accès externes et internes non essentiels jusqu\'au re-confinement de l\'anomalie.', hierarchy: [] },
-          'sec-sundown':   { name: 'Protocole SUNDOWN', image:'', presentation: 'Protocole d\'évacuation prioritaire réservé au personnel de recherche à haute valeur stratégique.', mission: 'Exfiltrer en moins de 10 minutes le personnel de niveau 4 et plus vers une zone sécurisée hors site.', hierarchy: [] },
-          'sec-veilnoir':  { name: 'Protocole VEIL-NOIR', image:'', presentation: 'Protocole de gestion de l\'information vis-à-vis des autorités civiles et des médias externes.', mission: 'Supprimer, brouiller ou recontextualiser toute information ayant fuité auprès du public ou des autorités non habilitées.', hierarchy: [] },
+          'sec-eit': { name: 'Equipe d\'Intervention Tactique', image:'', presentation: '...', mission: '...', hierarchy: [] },
+          'sec-bse': { name: 'XXX', image:'', presentation: '...', mission: '...', hierarchy: [] },
 
           // Scientifique
           'sci-cognitif': { name: 'Anomalies Cognitives & Mémétiques', image:'', presentation: 'Division dédiée à l\'étude des anomalies affectant la perception, la mémoire et la pensée.', mission: 'Documenter les mécanismes de contamination cognitive et développer des contre-mesures (écrans mémétiques, protocoles d\'amnésie ciblée).', hierarchy: [] },
