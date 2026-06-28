@@ -863,11 +863,11 @@
         .scp-table tr { cursor: pointer; transition: background .15s; }
         .scp-table tr:hover td { background: #111; color: #c0c0c0; }
 
-        .badge-green     { background: #1a2e1a; color: #6db56d; border: 1px solid #2d4d2d; }
-        .badge-yellow   { background: #2e2a10; color: #c8a830; border: 1px solid #4d4218; }
-        .badge-red    { background: #2e1010; color: #cc4444; border: 1px solid #4d1c1c; }
-        .badge-blue { background: #12102e; color: #4446cc; border: 1px solid #1a1b50; }
-        .badge-orange { background: #2e251a; color: #cc8d44; border: 1px solid #4d371c; }
+        .badge-safe     { background: #1a2e1a; color: #6db56d; border: 1px solid #2d4d2d; }
+        .badge-euclid   { background: #2e2a10; color: #c8a830; border: 1px solid #4d4218; }
+        .badge-keter    { background: #2e1010; color: #cc4444; border: 1px solid #4d1c1c; }
+        .badge-thaumiel { background: #0e1a2e; color: #4488cc; border: 1px solid #1a3050; }
+        .badge-neutralized { background: #1a1a1a; color: #888; border: 1px solid #333; }
         .badge {
           display: inline-block; font-family: 'JetBrains Mono',monospace;
           font-size: 9px; letter-spacing: .08em; text-transform: uppercase;
@@ -907,7 +907,67 @@
         }
         .scp-field-value { color: #c0c0c0; font-size: 13px; line-height: 1.7; }
 
-        /* ─── Image / logo placeholder dans modal ─── */
+        /* ─── Modal SCP élargie pour la mise en page fiche ─── */
+        #scp-modal-overlay .scp-modal { max-width: 860px; }
+
+        /* ─── Barre de statut (Confinement / Perturbation / Risque / Accréditation) ─── */
+        .scp-status-bar {
+          display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+          border: 1px solid #1a1a1a; margin-bottom: 24px;
+        }
+        .scp-status-item { padding: 14px 18px; border-right: 1px solid #1a1a1a; }
+        .scp-status-item:last-child { border-right: none; }
+        .scp-status-value {
+          font-family: 'JetBrains Mono', monospace; font-weight: 700;
+          font-size: 15px; letter-spacing: .04em; text-transform: uppercase;
+          margin-top: 5px;
+        }
+        .stat-safe      { color: #6db56d; }
+        .stat-euclid    { color: #c8a830; }
+        .stat-keter     { color: #cc4444; }
+        .stat-thaumiel  { color: #4488cc; }
+        .stat-neutral   { color: #c0c0c0; }
+
+        /* ─── Mise en page deux colonnes : image / texte ─── */
+        .scp-layout { display: flex; gap: 28px; flex-wrap: wrap; }
+        .scp-image-col { width: 180px; flex-shrink: 0; }
+        @media (max-width: 560px) { .scp-image-col { width: 100%; } }
+        .scp-image-frame {
+          width: 100%; height: 170px;
+          border: 1px solid #252525; background: #111;
+          display: flex; align-items: center; justify-content: center;
+          overflow: hidden;
+        }
+        .scp-image-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .scp-image-caption {
+          font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .06em;
+          color: #5a5a5a; text-align: center; margin-top: 8px; margin-bottom: 18px;
+        }
+        .scp-meta-label {
+          font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: .08em;
+          text-transform: uppercase; color: #5a5a5a; margin-top: 12px;
+        }
+        .scp-meta-dots { display: flex; gap: 4px; margin-top: 5px; }
+        .scp-meta-dots span { width: 14px; height: 8px; background: #2a2a2a; display: inline-block; }
+        .scp-meta-value {
+          font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700;
+          color: #c0c0c0; margin-top: 4px;
+        }
+        .scp-text-col { flex: 1; min-width: 260px; }
+        .scp-section-title {
+          font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700;
+          letter-spacing: .04em; color: #e8e8e8; text-transform: uppercase;
+          border-bottom: 1px solid #1a1a1a; padding-bottom: 8px; margin-bottom: 12px;
+        }
+        .scp-text-col .scp-section-title:not(:first-child) { margin-top: 24px; }
+        .scp-bullet-list { list-style: none; }
+        .scp-bullet-list li {
+          display: flex; gap: 10px; font-size: 13px; color: #a8a8a8;
+          line-height: 1.6; margin-bottom: 10px;
+        }
+        .scp-bullet-list li::before { content: '›'; color: #5a5a5a; flex-shrink: 0; }
+
+        /* ─── Image / logo placeholder dans modal SCP ─── */
         .modal-image-frame {
           width: 100%; height: 200px;
           border: 1px solid #252525; background: #111;
@@ -915,6 +975,20 @@
           margin-bottom: 20px; overflow: hidden;
         }
         .modal-image-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        /* ─── Logo en filigrane dans le modal Division (fond transparent) ─── */
+        #division-modal-overlay .scp-modal { position: relative; isolation: isolate; }
+        .division-modal-bg {
+          position: absolute; inset: 0;
+          display: flex; align-items: center; justify-content: center;
+          overflow: hidden; pointer-events: none; z-index: 0;
+        }
+        .division-modal-bg img {
+          width: 65%; max-width: 320px; height: auto;
+          object-fit: contain; opacity: 0.07; filter: brightness(2);
+        }
+        #division-modal-overlay .scp-modal-header,
+        #division-modal-overlay .scp-modal-body { position: relative; z-index: 1; }
 
         .org-card {
           border: 1px solid #1f1f1f; background: #0f0f0f;
@@ -959,6 +1033,36 @@
         .gdi-threat.neutral  { color: #c8a830; border-color: #4d4218; background: #2e2a10; }
         .gdi-threat.unknown  { color: #888; border-color: #333; background: #1a1a1a; }
 
+        /* ─── Embed Code d'Alerte ─── */
+        .alert-card {
+          border: 1px solid #1f1f1f; background: #0c0c0c;
+          margin-bottom: 16px; overflow: hidden;
+          transition: border-color .2s;
+        }
+        .alert-card:hover { border-color: #333; }
+        .alert-header {
+          display: flex; align-items: center; justify-content: space-between;
+          padding: 13px 20px; background: #111; border-bottom: 1px solid #1a1a1a;
+        }
+        .alert-header-left { display: flex; align-items: center; gap: 11px; }
+        .alert-dot {
+          width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0;
+          box-shadow: 0 0 8px currentColor;
+        }
+        .alert-name {
+          font-family: 'JetBrains Mono', monospace; font-size: 12px;
+          letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: #e8e8e8;
+        }
+        .alert-acc {
+          font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .08em;
+          border: 1px solid #252525; background: #161616; color: #888;
+          padding: 4px 11px; flex-shrink: 0;
+        }
+        .alert-body { padding: 18px 22px; }
+        .alert-body p { font-size: 13px; color: #a8a8a8; line-height: 1.75; margin-bottom: 10px; }
+        .alert-body p:last-child { margin-bottom: 0; }
+        .alert-body strong { color: #e8e8e8; font-weight: 600; }
+
         @media (max-width: 768px) {
           .wiki-sidebar { display: none; }
           .wiki-mobile-nav { display: block; }
@@ -977,14 +1081,25 @@
             <p class="tag-class" style="padding: 0 16px; margin-bottom: 16px;">[BASE DE DONNÉES / v1.0]</p>
           </div>
 
-          <!-- Catégorie 1 : Installations -->
+          <!-- Catégorie 0 : Information Globale -->
           <div class="wiki-cat-group">
+            <button class="wiki-cat-btn" data-cat="globale" onclick="wikiShowCat('globale')">
+              <i data-lucide="globe" class="w-3.5 h-3.5 flex-shrink-0"></i>
+              Information Globale
+            </button>
+            <div id="sub-globale" class="wiki-sublist" style="display:none;">
+              <button class="wiki-sub-btn" onclick="wikiShowPanel('codes-alertes')">Codes d'Alertes</button>
+            </div>
+          </div>
+
+          <!-- Catégorie 1 : Installations -->
+          <div class="wiki-cat-group" style="margin-top:4px;">
             <button class="wiki-cat-btn active" data-cat="installations" onclick="wikiShowCat('installations')">
               <i data-lucide="building-2" class="w-3.5 h-3.5 flex-shrink-0"></i>
               Installations
             </button>
             <div id="sub-installations" class="wiki-sublist">
-              <button class="wiki-sub-btn active" onclick="wikiShowPanel('zone-ayin')">Zone-Ayin  •  I.R.C</button>
+              <button class="wiki-sub-btn active" onclick="wikiShowPanel('zone-ayin')">Zone-Ayin</button>
             </div>
           </div>
 
@@ -992,14 +1107,14 @@
           <div class="wiki-cat-group" style="margin-top:4px;">
             <button class="wiki-cat-btn" data-cat="departements" onclick="wikiShowCat('departements')">
               <i data-lucide="shield" class="w-3.5 h-3.5 flex-shrink-0"></i>
-              Départements & Institutions
+              Départements
             </button>
             <div id="sub-departements" class="wiki-sublist" style="display:none;">
-              <button class="wiki-sub-btn" onclick="wikiShowPanel('dept-securite')">Département de la Sécurité</button>
-              <button class="wiki-sub-btn" onclick="wikiShowPanel('dept-X')">Département Scientifique</button>
-              <button class="wiki-sub-btn" onclick="wikiShowPanel('dept-X')">Département Médical</button>
-              <button class="wiki-sub-btn" onclick="wikiShowPanel('dept-X')">Département Administratif</button>
-              <button class="wiki-sub-btn" onclick="wikiShowPanel('fim-X')">Centre des Forces d'Intervention Mobiles</button>
+              <button class="wiki-sub-btn" onclick="wikiShowPanel('dept-securite')">Sécurité</button>
+              <button class="wiki-sub-btn" onclick="wikiShowPanel('dept-science')">Scientifique</button>
+              <button class="wiki-sub-btn" onclick="wikiShowPanel('dept-medical')">Médical</button>
+              <button class="wiki-sub-btn" onclick="wikiShowPanel('dept-ethique')">Comité d'Éthique</button>
+              <button class="wiki-sub-btn" onclick="wikiShowPanel('fim-centre')">Centre des Forces d'Intervention Mobiles</button>
             </div>
           </div>
 
@@ -1010,15 +1125,14 @@
               Groupes d'Intérêt
             </button>
             <div id="sub-gdi" class="wiki-sublist" style="display:none;">
-              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-X')">L'Insurrection du Chaos</button>
-              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-X')">L'Unité des Incidents Inhabituels</button>
-              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-X')">La Gendastrerie Nationale</button>
-              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-X')">La Marshall, Carter & Dark</button>
-              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-X')">L'Église du Dieu Brisé</button>
-              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-X')">L'Anderson Robotics</button>
-              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-X')">La Main du Serpent</button>
-              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-X')">La Division "P" du GRU</button>
-              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-X')">La Coalition Mondiale Occulte</button>
+              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-chaos')">Insurrection du Chaos</button>
+              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-uiu')">UIU</button>
+              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-gendas')">Gendastrerie Nationale</button>
+              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-mcd')">Marshall, Carter & Dark</button>
+              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-eglise')">Église du Dieu Brisé</button>
+              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-anderson')">Anderson Robotics</button>
+              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-serpent')">Main du Serpent</button>
+              <button class="wiki-sub-btn" onclick="wikiShowPanel('gdi-gru')">Division "P" du GRU</button>
             </div>
           </div>
 
@@ -1030,6 +1144,119 @@
         <main class="wiki-main bg-void">
 
           <!-- ════════════════════════════════════════
+               PANEL : CODES D'ALERTES (INFORMATION GLOBALE)
+               ════════════════════════════════════════ -->
+          <div id="wiki-codes-alertes" class="wiki-panel">
+            <div class="wiki-section-header">
+              <p class="wiki-breadcrumb">Information Globale <span>›</span> Codes d'Alertes</p>
+              <h1 class="font-mono font-bold text-2xl text-bright mt-2">Codes d'Alertes</h1>
+              <p class="text-subtle text-sm mt-1">Protocoles de Signalisation Standard — Réseau Ayinvox</p>
+            </div>
+            <div class="wiki-content-body">
+              <p class="tag-class mb-4">[RÉFÉRENCE — DIFFUSION INTERNE GÉNÉRALISÉE]</p>
+
+              <div class="alert-card">
+                <div class="alert-header">
+                  <div class="alert-header-left">
+                    <span class="alert-dot" style="background:#f5f5f5; color:#f5f5f5;"></span>
+                    <span class="alert-name">Code Blanc</span>
+                  </div>
+                  <span class="alert-acc">ACC 1</span>
+                </div>
+                <div class="alert-body">
+                  <p><strong>Description :</strong> Le Code Blanc signifie qu'une entité inconnue est sur Site. Le personnel doit rester vigilant et aviser en fonction des directives données par la sécurité.</p>
+                  <p><strong>Procédures :</strong> Arrêt de toutes expériences en cours ; le personnel doit suivre les directives fournies par la sécurité.</p>
+                </div>
+              </div>
+
+              <div class="alert-card">
+                <div class="alert-header">
+                  <div class="alert-header-left">
+                    <span class="alert-dot" style="background:#c8a830; color:#c8a830;"></span>
+                    <span class="alert-name">Code Jaune</span>
+                  </div>
+                  <span class="alert-acc">ACC 2</span>
+                </div>
+                <div class="alert-body">
+                  <p><strong>Description :</strong> Le Code Jaune signale un risque de contamination biologique, chimique ou mémétique détecté dans un secteur de l'installation.</p>
+                  <p><strong>Procédures :</strong> Mise en quarantaine immédiate du secteur concerné ; déploiement de l'Unité de Décontamination Anomalique (UDA).</p>
+                </div>
+              </div>
+
+              <div class="alert-card">
+                <div class="alert-header">
+                  <div class="alert-header-left">
+                    <span class="alert-dot" style="background:#4488cc; color:#4488cc;"></span>
+                    <span class="alert-name">Code Bleu</span>
+                  </div>
+                  <span class="alert-acc">ACC 2</span>
+                </div>
+                <div class="alert-body">
+                  <p><strong>Description :</strong> Le Code Bleu indique une anomalie environnementale ou climatique détectée à proximité ou à l'intérieur du périmètre de l'installation.</p>
+                  <p><strong>Procédures :</strong> Sécuriser les zones extérieures ; suspendre tout déplacement non essentiel entre les bâtiments.</p>
+                </div>
+              </div>
+
+              <div class="alert-card">
+                <div class="alert-header">
+                  <div class="alert-header-left">
+                    <span class="alert-dot" style="background:#cc4444; color:#cc4444;"></span>
+                    <span class="alert-name">Code Rouge</span>
+                  </div>
+                  <span class="alert-acc">ACC 3</span>
+                </div>
+                <div class="alert-body">
+                  <p><strong>Description :</strong> Le Code Rouge signale un danger immédiat pour la vie du personnel — agression, sabotage ou incident grave en cours.</p>
+                  <p><strong>Procédures :</strong> Évacuation immédiate des zones concernées ; alerte transmise sans délai aux Forces d'Intervention Mobiles.</p>
+                </div>
+              </div>
+
+              <div class="alert-card">
+                <div class="alert-header">
+                  <div class="alert-header-left">
+                    <span class="alert-dot" style="background:#5a5a5a; color:#5a5a5a;"></span>
+                    <span class="alert-name">Code Gris</span>
+                  </div>
+                  <span class="alert-acc">ACC 2</span>
+                </div>
+                <div class="alert-body">
+                  <p><strong>Description :</strong> Le Code Gris signale une défaillance technique critique — panne d'énergie, système de confinement secondaire ou réseau de communication.</p>
+                  <p><strong>Procédures :</strong> Activation immédiate des générateurs de secours ; équipe technique dépêchée sur place.</p>
+                </div>
+              </div>
+
+              <div class="alert-card">
+                <div class="alert-header">
+                  <div class="alert-header-left">
+                    <span class="alert-dot" style="background:#0a0a0a; color:#888; border:1px solid #444;"></span>
+                    <span class="alert-name">Code Noir</span>
+                  </div>
+                  <span class="alert-acc">ACC 5</span>
+                </div>
+                <div class="alert-body">
+                  <p><strong>Description :</strong> Le Code Noir signale une brèche de confinement de classe Keter en cours ou un échec critique des systèmes de confinement primaires.</p>
+                  <p><strong>Procédures :</strong> Déclenchement du Protocole LOCKDOWN-7 ; verrouillage total de l'installation ; déploiement prioritaire des FIM.</p>
+                </div>
+              </div>
+
+              <div class="alert-card">
+                <div class="alert-header">
+                  <div class="alert-header-left">
+                    <span class="alert-dot" style="background:#6db56d; color:#6db56d;"></span>
+                    <span class="alert-name">Code Vert</span>
+                  </div>
+                  <span class="alert-acc">ACC 1</span>
+                </div>
+                <div class="alert-body">
+                  <p><strong>Description :</strong> Le Code Vert signale la fin d'une situation d'alerte. La menace a été neutralisée ou écartée.</p>
+                  <p><strong>Procédures :</strong> Levée des restrictions en vigueur ; reprise des opérations et expériences standard.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ════════════════════════════════════════
                PANEL : ZONE-AYIN
                ════════════════════════════════════════ -->
           <div id="wiki-zone-ayin" class="wiki-panel active">
@@ -1037,10 +1264,10 @@
               <p class="wiki-breadcrumb">Installations <span>›</span> Zone-Ayin</p>
               <div class="flex items-center gap-4 mt-3">
                 <!-- LOGO INSTALLATION : remplace par <img src="logo-zone-ayin.png"> -->
-                <div class="entity-logo"><img src="ZoneAyinLogo-removebg-preview.png"></div>
+                <div class="entity-logo">LOGO</div>
                 <div>
-                  <h1 class="font-mono font-bold text-2xl text-bright">/ ZONE-AYIN : I.R.C</h1>
-                  <p class="text-subtle text-sm mt-1">» Installation de Recherche et de Confinement : France</p>
+                  <h1 class="font-mono font-bold text-2xl text-bright">Zone-Ayin</h1>
+                  <p class="text-subtle text-sm mt-1">Installation de Recherche et de Confinement — France</p>
                 </div>
               </div>
             </div>
@@ -1069,33 +1296,33 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr onclick="openScpModal('scp-999')">
-                        <td class="font-mono text-pale">SCP-999</td>
-                        <td><span class="badge badge-green">Safe</span></td>
-                        <td><span class="badge badge-green">Notice</span></td>
-                        <td><span class="badge badge-green">Dark</span></td>
-                        <td class="font-mono" style="font-size:11px;">Niveau 1</td>
+                      <tr onclick="openScpModal('scp-ayin-001')">
+                        <td class="font-mono text-pale">SCP-001-AY</td>
+                        <td><span class="badge badge-keter">Keter</span></td>
+                        <td><span class="badge badge-keter">Critique</span></td>
+                        <td><span class="badge badge-keter">Amida</span></td>
+                        <td class="font-mono" style="font-size:11px;">Niveau 5</td>
                       </tr>
-                      <tr onclick="openScpModal('scp-131')">
-                        <td class="font-mono text-pale">SCP-131</td>
-                        <td><span class="badge badge-green">Safe</span></td>
-                        <td><span class="badge badge-green">Notice</span></td>
-                        <td><span class="badge badge-green">Dark</span></td>
-                        <td class="font-mono" style="font-size:11px;">Niveau 1</td>
-                      </tr>
-                      <tr onclick="openScpModal('scp-2950')">
-                        <td class="font-mono text-pale">SCP-2950</td>
-                        <td><span class="badge badge-green">Safe</span></td>
-                        <td><span class="badge badge-green">Notice</span></td>
-                        <td><span class="badge badge-green">Dark</span></td>
-                        <td class="font-mono" style="font-size:11px;">Niveau 1</td>
-                      </tr>
-                      <tr onclick="openScpModal('scp-093')">
-                        <td class="font-mono text-pale">SCP-093</td>
-                        <td><span class="badge badge-yellow">Euclid</span></td>
-                        <td><span class="badge badge-orange">Danger</span></td>
-                        <td><span class="badge badge-yellow">Keneq</span></td>
+                      <tr onclick="openScpModal('scp-ayin-002')">
+                        <td class="font-mono text-pale">SCP-002-AY</td>
+                        <td><span class="badge badge-euclid">Euclide</span></td>
+                        <td><span class="badge badge-euclid">Modéré</span></td>
+                        <td><span class="badge badge-euclid">Vlam</span></td>
                         <td class="font-mono" style="font-size:11px;">Niveau 3</td>
+                      </tr>
+                      <tr onclick="openScpModal('scp-ayin-003')">
+                        <td class="font-mono text-pale">SCP-003-AY</td>
+                        <td><span class="badge badge-safe">Safe</span></td>
+                        <td><span class="badge badge-safe">Faible</span></td>
+                        <td><span class="badge badge-safe">Ehbi</span></td>
+                        <td class="font-mono" style="font-size:11px;">Niveau 2</td>
+                      </tr>
+                      <tr onclick="openScpModal('scp-ayin-004')">
+                        <td class="font-mono text-pale">SCP-004-AY</td>
+                        <td><span class="badge badge-keter">Keter</span></td>
+                        <td><span class="badge badge-keter">Extrême</span></td>
+                        <td><span class="badge badge-keter">Amida</span></td>
+                        <td class="font-mono" style="font-size:11px;">Niveau 5</td>
                       </tr>
                     </tbody>
                   </table>
@@ -1117,25 +1344,29 @@
             </div>
             <div class="wiki-content-body">
               <p class="tag-class mb-3">[PRÉSENTATION]</p>
-              <p class="text-ghost text-sm leading-relaxed mb-8">...</p>
+              <p class="text-ghost text-sm leading-relaxed mb-8">Le Département de la Sécurité constitue le premier rempart contre les brèches de confinement et les menaces externes. Il supervise l'ensemble des agents de sécurité déployés dans les installations, coordonne les protocoles d'évacuation et assure la liaison opérationnelle avec les Forces d'Intervention Mobiles.</p>
 
               <p class="tag-class mb-3">[HIÉRARCHIE]</p>
               <div class="mb-8">
                 <div class="org-card">
-                  <div class="org-rank">[ DDS. ]</div>
-                  <div><div class="org-name">Direteur(trice) de la Sécurité</div><div class="org-dept">Responsable du Département</div></div>
+                  <div class="org-rank">Chef Modér.</div>
+                  <div><div class="org-name">Davlon "Fang"</div><div class="org-dept">Responsable du Département — Zone-Ayin</div></div>
                 </div>
               </div>
 
               <p class="tag-class mb-3">[DIVISIONS & SPÉCIALITÉS]</p>
               <div class="space-y-2">
-                <div class="division-card" onclick="openDivisionModal('sec-eit')">
-                  <p class="text-pale text-sm font-mono">E.I.T</p>
-                  <p class="text-subtle text-xs mt-1">L'Equipe d'Intervention Tactique</p>
+                <div class="division-card" onclick="openDivisionModal('sec-lockdown7')">
+                  <p class="text-pale text-sm font-mono">Protocole LOCKDOWN-7</p>
+                  <p class="text-subtle text-xs mt-1">Confinement total de l'installation en cas de brèche de classe Keter.</p>
                 </div>
-                <div class="division-card" onclick="openDivisionModal('sec-bse')">
-                  <p class="text-pale text-sm font-mono">B.S.E</p>
-                  <p class="text-subtle text-xs mt-1">██ ████████ ████████████ █████████</p>
+                <div class="division-card" onclick="openDivisionModal('sec-sundown')">
+                  <p class="text-pale text-sm font-mono">Protocole SUNDOWN</p>
+                  <p class="text-subtle text-xs mt-1">Évacuation prioritaire du personnel de recherche de niveau 4+.</p>
+                </div>
+                <div class="division-card" onclick="openDivisionModal('sec-veilnoir')">
+                  <p class="text-pale text-sm font-mono">Protocole VEIL-NOIR</p>
+                  <p class="text-subtle text-xs mt-1">Suppression des informations auprès des autorités civiles externes.</p>
                 </div>
               </div>
             </div>
@@ -1315,19 +1546,7 @@
             </div>
             <div class="wiki-content-body">
               <p class="tag-class mb-3">[PRÉSENTATION]</p>
-              <p class="text-ghost text-sm leading-relaxed mb-8">L'Insurrection du Chaos est l'ennemi juré de la Fondation Ayinvox. Organisation paramilitaire anomalique, elle cherche à libérer les anomalies confinées pour les exploiter comme armes ou les utiliser afin de renverser les structures du pouvoir mondial. Ses origines sont liées à d'anciens dissidents de la Fondation.</p>
-
-              <p class="tag-class mb-3">[HIÉRARCHIE]</p>
-              <div class="space-y-2">
-                <div class="division-card" onclick="openDivisionModal('ic-ingenieur')">
-                  <p class="font-mono text-pale text-sm">L'Ingénieur</p>
-                  <p class="text-subtle text-xs mt-1">Figure centrale — Commandement</p>
-                </div>
-                <div class="division-card" onclick="openDivisionModal('ic-delta')">
-                  <p class="font-mono text-pale text-sm">Commandement Delta</p>
-                  <p class="text-subtle text-xs mt-1">Bras militaire — Commandement</p>
-                </div>
-              </div>
+              <p class="text-ghost text-sm leading-relaxed">L'Insurrection du Chaos est l'ennemi juré de la Fondation Ayinvox. Organisation paramilitaire anomalique, elle cherche à libérer les anomalies confinées pour les exploiter comme armes ou les utiliser afin de renverser les structures du pouvoir mondial. Ses origines sont liées à d'anciens dissidents de la Fondation.</p>
             </div>
           </div>
 
@@ -1345,11 +1564,7 @@
             </div>
             <div class="wiki-content-body">
               <p class="tag-class mb-3">[PRÉSENTATION]</p>
-              <p class="text-ghost text-sm leading-relaxed mb-6">L'UIU est une unité spéciale du FBI chargée d'enquêter sur les incidents paranormaux sur le territoire américain. Bien que souvent dépassée par l'ampleur des phénomènes anomaliques, elle représente une menace pour la couverture de la Fondation et ses opérations en sol américain. Les relations avec Ayinvox sont ambiguës : coopération ponctuelle ou friction selon les circonstances.</p>
-              <div style="border:1px solid #1a1a1a; padding:16px; background:#0d0d0d;">
-                <p class="tag-class mb-2" style="font-size:9px;">[NIVEAU DE MENACE FONDATION]</p>
-                <p class="text-ghost text-sm">Faible à modéré. L'UIU manque généralement de ressources et d'informations suffisantes pour constituer une menace directe, mais ses enquêtes peuvent compromettre les opérations de voile.</p>
-              </div>
+              <p class="text-ghost text-sm leading-relaxed">L'UIU est une unité spéciale du FBI chargée d'enquêter sur les incidents paranormaux sur le territoire américain. Bien que souvent dépassée par l'ampleur des phénomènes anomaliques, elle représente une menace pour la couverture de la Fondation et ses opérations en sol américain. Les relations avec Ayinvox sont ambiguës : coopération ponctuelle ou friction selon les circonstances.</p>
             </div>
           </div>
 
@@ -1385,11 +1600,7 @@
             </div>
             <div class="wiki-content-body">
               <p class="tag-class mb-3">[PRÉSENTATION]</p>
-              <p class="text-ghost text-sm leading-relaxed mb-6">Marshall, Carter & Dark est une organisation de luxe occulte commercialisant des anomalies à une clientèle ultra-fortunée. Contrairement à l'Insurrection du Chaos, MC&D ne cherche pas la destruction de la Fondation mais représente un marché noir anomalique concurrent qui complique les opérations de voile.</p>
-              <div style="border:1px solid #2e2a10; padding:16px; background:#1a1800;">
-                <p class="text-sm" style="color:#c8a830; font-family:'JetBrains Mono',monospace; font-size:10px;">AVIS OPÉRATIONNEL</p>
-                <p class="text-subtle text-xs mt-2">Les membres de MC&D disposent souvent de ressources financières et légales supérieures aux agents de la Fondation. La confrontation directe est déconseillée sans autorisation de niveau 4.</p>
-              </div>
+              <p class="text-ghost text-sm leading-relaxed">Marshall, Carter & Dark est une organisation de luxe occulte commercialisant des anomalies à une clientèle ultra-fortunée. Contrairement à l'Insurrection du Chaos, MC&D ne cherche pas la destruction de la Fondation mais représente un marché noir anomalique concurrent qui complique les opérations de voile.</p>
             </div>
           </div>
 
@@ -1461,11 +1672,7 @@
             </div>
             <div class="wiki-content-body">
               <p class="tag-class mb-3">[PRÉSENTATION]</p>
-              <p class="text-ghost text-sm leading-relaxed mb-6">Branche paramilitaire anomalique du renseignement militaire russe (GRU), la Division "P" cherche à capturer et exploiter les anomalies à des fins militaires et géopolitiques. Elle opère en concurrence directe avec la Fondation, notamment dans les régions arctiques où les deux organisations se disputent le contrôle d'anomalies découvertes récemment.</p>
-              <div style="border:1px solid #2e1010; padding:16px; background:#1a0808;">
-                <p class="text-sm" style="color:#cc4444; font-family:'JetBrains Mono',monospace; font-size:10px;">⚠ AVIS DE SÉCURITÉ — NIVEAU ROUGE</p>
-                <p class="text-subtle text-xs mt-2">La Division "P" dispose de ressources militaires considérables et de la couverture légale de l'État russe. Toute confrontation directe doit être validée par le Commandement O5.</p>
-              </div>
+              <p class="text-ghost text-sm leading-relaxed">Branche paramilitaire anomalique du renseignement militaire russe (GRU), la Division "P" cherche à capturer et exploiter les anomalies à des fins militaires et géopolitiques. Elle opère en concurrence directe avec la Fondation, notamment dans les régions arctiques où les deux organisations se disputent le contrôle d'anomalies découvertes récemment.</p>
             </div>
           </div>
 
@@ -1484,17 +1691,53 @@
           </div>
           <div class="scp-modal-body">
             <!-- IMAGE DU SCP : si data.image est défini, une balise <img> sera insérée automatiquement ici -->
-            <div id="modal-scp-image" class="modal-image-frame">
-              <span class="tag-class" style="font-size:9px;">[ IMAGE SCP NON DISPONIBLE ]</span>
+            <!-- BARRE DE STATUT -->
+            <div class="scp-status-bar">
+              <div class="scp-status-item">
+                <p class="scp-field-label">Classe de Confinement</p>
+                <div id="modal-scp-class" class="scp-status-value"></div>
+              </div>
+              <div class="scp-status-item">
+                <p class="scp-field-label">Classe de Perturbation</p>
+                <div id="modal-scp-disrupt" class="scp-status-value"></div>
+              </div>
+              <div class="scp-status-item">
+                <p class="scp-field-label">Classe de Risque</p>
+                <div id="modal-scp-risk" class="scp-status-value"></div>
+              </div>
+              <div class="scp-status-item">
+                <p class="scp-field-label">Accréditation</p>
+                <div id="modal-scp-cred" class="scp-status-value stat-neutral"></div>
+              </div>
             </div>
-            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap:12px; margin-bottom:20px;">
-              <div class="scp-field"><div class="scp-field-label">Classe de Confinement</div><div id="modal-scp-class" class="scp-field-value"></div></div>
-              <div class="scp-field"><div class="scp-field-label">Classe de Risque</div><div id="modal-scp-risk" class="scp-field-value"></div></div>
-              <div class="scp-field"><div class="scp-field-label">Perturbation</div><div id="modal-scp-disrupt" class="scp-field-value"></div></div>
-              <div class="scp-field"><div class="scp-field-label">Accréditation</div><div id="modal-scp-cred" class="scp-field-value"></div></div>
+
+            <!-- MISE EN PAGE FICHE : IMAGE / TEXTE -->
+            <div class="scp-layout">
+              <div class="scp-image-col">
+                <!-- IMAGE DU SCP : si data.image est défini, une balise <img> sera insérée automatiquement ici -->
+                <div id="modal-scp-image" class="scp-image-frame">
+                  <span class="tag-class" style="font-size:9px; text-align:center; padding:0 8px;">[ IMAGE NON DISPONIBLE ]</span>
+                </div>
+                <p id="modal-scp-caption" class="scp-image-caption"></p>
+
+                <p class="scp-meta-label">Réf. Visuelle :</p>
+                <div class="scp-meta-dots"><span></span><span></span><span></span></div>
+
+                <p class="scp-meta-label">Événement Type :</p>
+                <p id="modal-scp-event-type" class="scp-meta-value">AUCUN</p>
+
+                <p class="scp-meta-label">Incidents Recensés :</p>
+                <p id="modal-scp-incidents" class="scp-meta-value">0</p>
+              </div>
+
+              <div class="scp-text-col">
+                <h3 class="scp-section-title">01 Description</h3>
+                <ul id="modal-scp-desc-list" class="scp-bullet-list"></ul>
+
+                <h3 class="scp-section-title">02 Procédures de Confinement Spéciales</h3>
+                <ul id="modal-scp-containment-list" class="scp-bullet-list"></ul>
+              </div>
             </div>
-            <div class="scp-field"><div class="scp-field-label">Procédures de Confinement Spéciales</div><div id="modal-scp-containment" class="scp-field-value"></div></div>
-            <div class="scp-field"><div class="scp-field-label">Description</div><div id="modal-scp-desc" class="scp-field-value"></div></div>
           </div>
         </div>
       </div>
@@ -1502,6 +1745,8 @@
       <!-- ══ MODAL DIVISION / GÉNÉRIQUE ══ -->
       <div id="division-modal-overlay" class="scp-modal-overlay" onclick="closeDivisionModalOutside(event)">
         <div class="scp-modal" role="dialog" aria-modal="true">
+          <!-- LOGO DE LA DIVISION EN FILIGRANE : si data.image est défini, une balise <img> est insérée automatiquement ici, en fond transparent -->
+          <div id="modal-division-bg" class="division-modal-bg"></div>
           <div class="scp-modal-header">
             <div>
               <p id="modal-division-tag" class="tag-class mb-1"></p>
@@ -1510,10 +1755,6 @@
             <button class="scp-modal-close" onclick="closeDivisionModal()" aria-label="Fermer">✕</button>
           </div>
           <div class="scp-modal-body">
-            <!-- LOGO DE LA DIVISION : si data.image est défini, une balise <img> sera insérée automatiquement ici -->
-            <div id="modal-division-image" class="modal-image-frame">
-              <span class="tag-class" style="font-size:9px;">[ LOGO NON DISPONIBLE ]</span>
-            </div>
             <div class="scp-field"><div class="scp-field-label">Présentation</div><div id="modal-division-presentation" class="scp-field-value"></div></div>
             <div class="scp-field" id="modal-division-mission-wrap"><div class="scp-field-label">Mission</div><div id="modal-division-mission" class="scp-field-value"></div></div>
             <div class="scp-field" id="modal-division-hierarchy-wrap">
@@ -1528,57 +1769,92 @@
       <script>
         // ─── Base de données SCP ───
         const SCP_DATA = {
-          'scp-999': {
-            id: 'SCP-999',
-            name: 'Le Monstre Chatouilleux',
-            classe: '<span class="badge badge-green">Safe</span>',
-            risk: '<span class="badge badge-green">Notice</span>',
-            disrupt: '<span class="badge badge-green">Dark</span>',
-            cred: 'Niveau 1',
+          'scp-ayin-001': {
+            id: 'SCP-001-AY',
+            name: 'L\'Abysse Silencieux',
+            classe: { text: 'Keter', color: 'stat-keter' },
+            risk: { text: 'Critique', color: 'stat-keter' },
+            disrupt: { text: 'Amida', color: 'stat-keter' },
+            cred: 'Niveau 5',
             image: '', // ex: 'scp-001-ay.jpg'
-            containment: '...',
-            desc: '...'
+            eventType: 'AUCUN',
+            incidents: 1,
+            descPoints: [
+              'Entité auditive de nature indéterminée, capable de se déplacer à travers les vibrations sonores.',
+              'Induit une paralysie cognitive irréversible chez tout individu percevant sa « fréquence signature ».',
+              'Aucun décès direct attribué — les victimes demeurent conscientes mais totalement dissociées de leur volonté.'
+            ],
+            containmentPoints: [
+              'Confinement en chambre anéchoïde de 40m³ à isolation phonique totale (classe ZÉRO-SON).',
+              'Aucune communication vocale autorisée dans un rayon de 200m.',
+              'Personnel sourd de naissance privilégié pour les interactions directes. Protocole SUNDOWN actif en permanence.'
+            ]
           },
-          'scp-131': {
-            id: 'SCP-131',
-            name: 'Les "Eye Pods"',
-            classe: '<span class="badge badge-green">Safe</span>',
-            risk: '<span class="badge badge-green">Notice</span>',
-            disrupt: '<span class="badge badge-green">Dark</span>',
-            cred: 'Niveau 1',
+          'scp-ayin-002': {
+            id: 'SCP-002-AY',
+            name: 'Le Miroir de Voss',
+            classe: { text: 'Euclide', color: 'stat-euclid' },
+            risk: { text: 'Modéré', color: 'stat-euclid' },
+            disrupt: { text: 'Vlam', color: 'stat-euclid' },
+            cred: 'Niveau 3',
             image: '',
-            containment: '...',
-            desc: '...'
+            eventType: 'AUCUN',
+            incidents: 1,
+            descPoints: [
+              'Miroir en pied d\'époque victorienne dont le reflet présente systématiquement la version « alternative » de l\'observateur.',
+              'Représente ce que la personne aurait été dans des circonstances différentes.',
+              'Une exposition prolongée induit une dissociation identitaire progressive.'
+            ],
+            containmentPoints: [
+              'Stocké dans une chambre à doubles parois réfléchissantes. Toute autre surface réfléchissante y est interdite.',
+              'Couverture opaque obligatoire lors des transports. Accès restreint aux personnels de niveau 3+.'
+            ]
           },
-          'scp-2950': {
-            id: 'SCP-2950',
-            name: 'Juste une Chaise',
-            classe: '<span class="badge badge-green">Safe</span>',
-            risk: '<span class="badge badge-green">Notice</span>',
-            disrupt: '<span class="badge badge-green">Dark</span>',
-            cred: 'Niveau 1',
+          'scp-ayin-003': {
+            id: 'SCP-003-AY',
+            name: 'Carnet de Notes Infini',
+            classe: { text: 'Safe', color: 'stat-safe' },
+            risk: { text: 'Faible', color: 'stat-safe' },
+            disrupt: { text: 'Ehbi', color: 'stat-safe' },
+            cred: 'Niveau 2',
             image: '',
-            containment: '...',
-            desc: '...'
+            eventType: 'AUCUN',
+            incidents: 0,
+            descPoints: [
+              'Carnet A5 aux pages apparemment infinies.',
+              'Tout texte écrit dedans disparaît en 24 heures, remplacé par une réponse détaillée à la question implicite dans l\'écriture.',
+              'Les réponses sont toujours exactes mais révèlent systématiquement une information que l\'auteur aurait préféré ne pas savoir.'
+            ],
+            containmentPoints: [
+              'Stockage standard en armoire sécurisée. Aucun accès non supervisé.',
+              'Ne jamais laisser le carnet sans surveillance en présence d\'un seul individu.'
+            ]
           },
-          'scp-093': {
-            id: 'SCP-093',
-            name: 'Objet de la Mer Rouge',
-            classe: '<span class="badge badge-yellow">Euclid</span>',
-            risk: '<span class="badge badge-orange">Danger</span>',
-            disrupt: '<span class="badge badge-yellow">Keneq</span>',
-            cred: 'Niveau 1',
+          'scp-ayin-004': {
+            id: 'SCP-004-AY',
+            name: '[DONNÉES EXPURGÉES]',
+            classe: { text: 'Keter', color: 'stat-keter' },
+            risk: { text: 'Extrême', color: 'stat-keter' },
+            disrupt: { text: 'Amida', color: 'stat-keter' },
+            cred: 'Niveau 5',
             image: '',
-            containment: '...',
-            desc: '...'
+            eventType: '[CLASSIFIÉ]',
+            incidents: 0,
+            descPoints: [
+              '[ACCÈS CLASSIFIÉ — NIVEAU O5 REQUIS] — Toute tentative d\'accès non autorisé à ce dossier sera enregistrée et soumise au Comité d\'Éthique pour évaluation disciplinaire.'
+            ],
+            containmentPoints: [
+              '[ACCÈS CLASSIFIÉ — NIVEAU O5 REQUIS]'
+            ]
           }
         };
 
         // ─── Base de données Divisions / Hiérarchies (départements, FIM, GdI) ───
         const DIVISION_DATA = {
           // Sécurité
-          'sec-eit': { name: 'Equipe d\'Intervention Tactique', image:'', presentation: '...', mission: '...', hierarchy: [] },
-          'sec-bse': { name: 'XXX', image:'', presentation: '...', mission: '...', hierarchy: [] },
+          'sec-lockdown7': { name: 'Protocole LOCKDOWN-7', image:'', presentation: 'Protocole de confinement total déclenché automatiquement lors d\'une brèche de classe Keter confirmée.', mission: 'Sceller intégralement l\'installation concernée, couper tous les accès externes et internes non essentiels jusqu\'au re-confinement de l\'anomalie.', hierarchy: [] },
+          'sec-sundown':   { name: 'Protocole SUNDOWN', image:'', presentation: 'Protocole d\'évacuation prioritaire réservé au personnel de recherche à haute valeur stratégique.', mission: 'Exfiltrer en moins de 10 minutes le personnel de niveau 4 et plus vers une zone sécurisée hors site.', hierarchy: [] },
+          'sec-veilnoir':  { name: 'Protocole VEIL-NOIR', image:'', presentation: 'Protocole de gestion de l\'information vis-à-vis des autorités civiles et des médias externes.', mission: 'Supprimer, brouiller ou recontextualiser toute information ayant fuité auprès du public ou des autorités non habilitées.', hierarchy: [] },
 
           // Scientifique
           'sci-cognitif': { name: 'Anomalies Cognitives & Mémétiques', image:'', presentation: 'Division dédiée à l\'étude des anomalies affectant la perception, la mémoire et la pensée.', mission: 'Documenter les mécanismes de contamination cognitive et développer des contre-mesures (écrans mémétiques, protocoles d\'amnésie ciblée).', hierarchy: [] },
@@ -1644,18 +1920,32 @@
           if (!d) return;
           document.getElementById('modal-scp-id').textContent = d.id;
           document.getElementById('modal-scp-name').textContent = d.name;
-          document.getElementById('modal-scp-class').innerHTML = d.classe;
-          document.getElementById('modal-scp-risk').innerHTML = d.risk;
-          document.getElementById('modal-scp-disrupt').innerHTML = d.disrupt;
+
+          const setStat = (elId, stat) => {
+            const el = document.getElementById(elId);
+            el.textContent = stat.text;
+            el.className = 'scp-status-value ' + stat.color;
+          };
+          setStat('modal-scp-class', d.classe);
+          setStat('modal-scp-risk', d.risk);
+          setStat('modal-scp-disrupt', d.disrupt);
           document.getElementById('modal-scp-cred').textContent = d.cred;
-          document.getElementById('modal-scp-containment').textContent = d.containment;
-          document.getElementById('modal-scp-desc').textContent = d.desc;
+
+          document.getElementById('modal-scp-caption').textContent = 'Fig. 1 — ' + d.id;
+          document.getElementById('modal-scp-event-type').textContent = d.eventType || 'AUCUN';
+          document.getElementById('modal-scp-incidents').textContent = (d.incidents !== undefined) ? d.incidents : 0;
+
+          const descList = document.getElementById('modal-scp-desc-list');
+          descList.innerHTML = (d.descPoints || []).map(p => `<li>${p}</li>`).join('');
+
+          const containmentList = document.getElementById('modal-scp-containment-list');
+          containmentList.innerHTML = (d.containmentPoints || []).map(p => `<li>${p}</li>`).join('');
 
           const imgBox = document.getElementById('modal-scp-image');
           if (d.image) {
             imgBox.innerHTML = `<img src="${d.image}" alt="${d.name}">`;
           } else {
-            imgBox.innerHTML = `<span class="tag-class" style="font-size:9px;">[ IMAGE SCP NON DISPONIBLE ]</span>`;
+            imgBox.innerHTML = `<span class="tag-class" style="font-size:9px; text-align:center; padding:0 8px;">[ IMAGE NON DISPONIBLE ]</span>`;
           }
 
           document.getElementById('scp-modal-overlay').classList.add('open');
@@ -1702,11 +1992,11 @@
             hierWrap.style.display = 'none';
           }
 
-          const imgBox = document.getElementById('modal-division-image');
+          const bgBox = document.getElementById('modal-division-bg');
           if (d.image) {
-            imgBox.innerHTML = `<img src="${d.image}" alt="${d.name}">`;
+            bgBox.innerHTML = `<img src="${d.image}" alt="">`;
           } else {
-            imgBox.innerHTML = `<span class="tag-class" style="font-size:9px;">[ LOGO NON DISPONIBLE ]</span>`;
+            bgBox.innerHTML = '';
           }
 
           document.getElementById('division-modal-overlay').classList.add('open');
@@ -1741,7 +2031,7 @@
 
         // ─── Afficher/masquer une catégorie ───
         function wikiShowCat(cat) {
-          ['installations','departements','gdi'].forEach(c => {
+          ['globale','installations','departements','gdi'].forEach(c => {
             const sub = document.getElementById('sub-' + c);
             if (sub) sub.style.display = c === cat ? 'block' : 'none';
           });
@@ -1749,6 +2039,7 @@
             b.classList.toggle('active', b.dataset.cat === cat);
           });
           const firstPanels = {
+            globale: 'codes-alertes',
             installations: 'zone-ayin',
             departements: 'dept-securite',
             gdi: 'gdi-chaos'
