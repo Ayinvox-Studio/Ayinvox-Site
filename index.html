@@ -863,11 +863,11 @@
         .scp-table tr { cursor: pointer; transition: background .15s; }
         .scp-table tr:hover td { background: #111; color: #c0c0c0; }
 
-        .badge-safe     { background: #1a2e1a; color: #6db56d; border: 1px solid #2d4d2d; }
-        .badge-euclid   { background: #2e2a10; color: #c8a830; border: 1px solid #4d4218; }
-        .badge-keter    { background: #2e1010; color: #cc4444; border: 1px solid #4d1c1c; }
-        .badge-thaumiel { background: #0e1a2e; color: #4488cc; border: 1px solid #1a3050; }
-        .badge-neutralized { background: #1a1a1a; color: #888; border: 1px solid #333; }
+        .badge-green     { background: #1a2e1a; color: #6db56d; border: 1px solid #2d4d2d; }
+        .badge-yellow   { background: #2e2a10; color: #c8a830; border: 1px solid #4d4218; }
+        .badge-red    { background: #2e1010; color: #cc4444; border: 1px solid #4d1c1c; }
+        .badge-blue { background: #12102e; color: #4446cc; border: 1px solid #1a1b50; }
+        .badge-orange { background: #2e251a; color: #cc8d44; border: 1px solid #4d371c; }
         .badge {
           display: inline-block; font-family: 'JetBrains Mono',monospace;
           font-size: 9px; letter-spacing: .08em; text-transform: uppercase;
@@ -1038,8 +1038,8 @@
                 <!-- LOGO INSTALLATION : remplace par <img src="logo-zone-ayin.png"> -->
                 <div class="entity-logo"><img src="ZoneAyinLogo-removebg-preview.png"></div>
                 <div>
-                  <h1 class="font-mono font-bold text-2xl text-bright">Zone-Ayin</h1>
-                  <p class="text-subtle text-sm mt-1">Installation de Recherche et de Confinement — France</p>
+                  <h1 class="font-mono font-bold text-2xl text-bright">/ ZONE-AYIN : I.R.C</h1>
+                  <p class="text-subtle text-sm mt-1">» Installation de Recherche et de Confinement : France</p>
                 </div>
               </div>
             </div>
@@ -1068,12 +1068,12 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr onclick="openScpModal('scp-ayin-001')">
-                        <td class="font-mono text-pale">SCP-001-AY</td>
-                        <td><span class="badge badge-keter">Keter</span></td>
-                        <td><span class="badge badge-keter">Critique</span></td>
-                        <td><span class="badge badge-keter">Amida</span></td>
-                        <td class="font-mono" style="font-size:11px;">Niveau 5</td>
+                      <tr onclick="openScpModal('scp-999')">
+                        <td class="font-mono text-pale">SCP-999</td>
+                        <td><span class="badge badge-green">Safe</span></td>
+                        <td><span class="badge badge-green">Notice</span></td>
+                        <td><span class="badge badge-green">Sombre</span></td>
+                        <td class="font-mono" style="font-size:11px;">Niveau 1</td>
                       </tr>
                       <tr onclick="openScpModal('scp-ayin-002')">
                         <td class="font-mono text-pale">SCP-002-AY</td>
@@ -1531,16 +1531,16 @@
       <script>
         // ─── Base de données SCP ───
         const SCP_DATA = {
-          'scp-ayin-001': {
-            id: 'SCP-001-AY',
-            name: 'L\'Abysse Silencieux',
-            classe: '<span class="badge badge-keter">Keter</span>',
-            risk: '<span class="badge badge-keter">Critique</span>',
-            disrupt: '<span class="badge badge-keter">Amida</span>',
-            cred: 'Niveau 5',
+          'scp-999': {
+            id: 'SCP-999',
+            name: 'Le Monstre Chatouilleux',
+            classe: '<span class="badge badge-green">Safe</span>',
+            risk: '<span class="badge badge-green">Notice</span>',
+            disrupt: '<span class="badge badge-green">Sombre</span>',
+            cred: 'Niveau 1',
             image: '', // ex: 'scp-001-ay.jpg'
-            containment: 'Confinement en chambre anéchoïde de 40m³ à isolation phonique totale (classe ZÉRO-SON). Aucune communication vocale dans un rayon de 200m. Personnel sourd de naissance privilégié pour les interactions directes. Protocole SUNDOWN actif en permanence.',
-            desc: 'SCP-001-AY se manifeste comme une entité auditive dont la nature exacte reste indéterminée. Capable de se déplacer à travers les vibrations sonores, elle induit une paralysie cognitive irréversible chez tout individu percevant sa "fréquence signature". Aucun décès direct attribué — les victimes demeurent conscientes mais totalement dissociées de leur volonté.'
+            containment: '...',
+            desc: '...'
           },
           'scp-ayin-002': {
             id: 'SCP-002-AY',
