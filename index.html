@@ -940,11 +940,11 @@
           font-size: 15px; letter-spacing: .04em; text-transform: uppercase;
           margin-top: 5px;
         }
-        .stat-g      { color: #6db56d; }
-        .stat-y    { color: #B4B56D; }
-        .stat-r     { color: #B56D6D; }
-        .stat-o  { color: #B5956D; }
-        .stat-b   { color: #776DB5; }
+        .stat-g      { color: #5fb86b; }
+        .stat-y    { color: #d6c44b; }
+        .stat-r     { color: #e0524a; }
+        .stat-o  { color: #e08a3e; }
+        .stat-b   { color: #5b9bd5; }
         /* Couleurs menace pour la valeur texte dans la barre de statut */
         .stat-menace-blanc       { color: #f0f0f0; }
         .stat-menace-bleu        { color: #5b9bd5; }
@@ -1163,7 +1163,7 @@
               Départements
             </button>
             <div id="sub-departements" class="wiki-sublist" style="display:none;">
-              <button class="wiki-sub-btn" onclick="wikiShowPanel('dept-securite')">►   Département de la Sécurité</button>
+              <button class="wiki-sub-btn" onclick="wikiShowPanel('dept-securite')">►   Département de la Sécurité<span class="badge badge-acc-1">ACC 1</span></button>
               <button class="wiki-sub-btn" onclick="wikiShowPanel('dept-science')">►   Département Scientifique</button>
               <button class="wiki-sub-btn" onclick="wikiShowPanel('dept-medical')">►   Département Médical</button>
               <button class="wiki-sub-btn" onclick="wikiShowPanel('dept-admin')">►   Département Administratif</button>
@@ -1320,7 +1320,7 @@
                 <div class="entity-logo"><img src="ZoneAyinLogo-removebg-preview.png"></div>
                 <div>
                   <h1 class="font-mono font-bold text-2xl text-bright">ZONE - AYIN</h1>
-                  <p class="text-subtle text-sm mt-1">» Installation de Recherche et de Confinement — France</p>
+                  <p class="text-subtle text-sm mt-1">» Installation de Recherche et de Confinement</p>
                 </div>
               </div>
             </div>
@@ -1356,7 +1356,7 @@
                         <td><span class="badge badge-g">Notice</span></td>
                         <td><span class="badge badge-g">Dark</span></td>
                         <td><span class="badge badge-menace-vert">Vert</span></td>
-                        <td><span class="badge badge-acc-1">1</span></td>
+                        <td><span class="badge badge-acc-1">ACC 1</span></td>
                       </tr>
                       <tr onclick="openScpModal('scp-131')">
                         <td class="font-mono text-pale">SCP-131</td>
@@ -1364,7 +1364,7 @@
                         <td><span class="badge badge-g">Notice</span></td>
                         <td><span class="badge badge-g">Dark</span></td>
                         <td><span class="badge badge-menace-vert">Vert</span></td>
-                        <td><span class="badge badge-acc-1">1</span></td>
+                        <td><span class="badge badge-acc-1">ACC 1</span></td>
                       </tr>
                       <tr onclick="openScpModal('scp-2950')">
                         <td class="font-mono text-pale">SCP-2950</td>
@@ -1372,7 +1372,7 @@
                         <td><span class="badge badge-g">Notice</span></td>
                         <td><span class="badge badge-g">Dark</span></td>
                         <td><span class="badge badge-menace-bleu">Bleu</span></td>
-                        <td><span class="badge badge-acc-1">1</span></td>
+                        <td><span class="badge badge-acc-1">ACC 1</span></td>
                       </tr>
                       <tr onclick="openScpModal('scp-093')">
                         <td class="font-mono text-pale">SCP-093</td>
@@ -1380,7 +1380,7 @@
                         <td><span class="badge badge-o">Danger</span></td>
                         <td><span class="badge badge-y">Keneq</span></td>
                         <td><span class="badge badge-menace-orange">Orange</span></td>
-                        <td><span class="badge badge-acc-3">3</span></td>
+                        <td><span class="badge badge-acc-3">ACC 3</span></td>
                       </tr>
                     </tbody>
                   </table>
@@ -1402,7 +1402,7 @@
             </div>
             <div class="wiki-content-body">
               <p class="tag-class mb-3">[PRÉSENTATION]</p>
-              <p class="text-ghost text-sm leading-relaxed mb-8">Le Département de la Sécurité constitue le premier rempart contre les brèches de confinement et les menaces externes. Il supervise l'ensemble des agents de sécurité déployés dans les installations, coordonne les protocoles d'évacuation et assure la liaison opérationnelle avec les Forces d'Intervention Mobiles.</p>
+              <p class="text-ghost text-sm leading-relaxed mb-8">Le Département de la Sécurité constitue la force paramilitaire interne de la Fondation SCP, responsable du maintien de l'ordre et de la protection physique des installations, du personnel et des actifs critiques. Sa mission principale consiste à sécuriser les zones de confinement, à contrôler les accès aux secteurs sensibles et à intervenir immédiatement en cas de brèche ou d'intrusion. En agissant comme une barrière opérationnelle entre les anomalies confinées et le monde extérieur, ce département garantit la continuité des activités scientifiques en neutralisant toute menace interne ou externe avec discipline et réactivité.</p>
 
               <p class="tag-class mb-3">[HIÉRARCHIE]</p>
               <div class="mb-8">
@@ -1420,8 +1420,8 @@
                 <div class="org-card">
                   <div class="org-acronym">Cln.</div>
                   <div class="org-info">
-                    <div class="org-name">Davlon "Fang"</div>
-                    <div class="org-role-desc">Directeur de la Sécurité — Zone-Ayin</div>
+                    <div class="org-name">Directeur de la Sécurité</div>
+                    <div class="org-role-desc">...</div>
                   </div>
                   <div class="org-codes">
                     <div class="org-code-box badge-acc-4">
@@ -1439,16 +1439,12 @@
               <p class="tag-class mb-3">[DIVISIONS & SPÉCIALITÉS]</p>
               <div class="space-y-2">
                 <div class="division-card" onclick="openDivisionModal('sec-lockdown7')">
-                  <p class="text-pale text-sm font-mono">Protocole LOCKDOWN-7</p>
-                  <p class="text-subtle text-xs mt-1">Confinement total de l'installation en cas de brèche de classe Keter.</p>
+                  <p class="text-pale text-sm font-mono">» E.I.T</p>
+                  <p class="text-subtle text-xs mt-1">l'Équipe d'Intervention Tactique</p>
                 </div>
                 <div class="division-card" onclick="openDivisionModal('sec-sundown')">
-                  <p class="text-pale text-sm font-mono">Protocole SUNDOWN</p>
-                  <p class="text-subtle text-xs mt-1">Évacuation prioritaire du personnel de recherche de niveau 4+.</p>
-                </div>
-                <div class="division-card" onclick="openDivisionModal('sec-veilnoir')">
-                  <p class="text-pale text-sm font-mono">Protocole VEIL-NOIR</p>
-                  <p class="text-subtle text-xs mt-1">Suppression des informations auprès des autorités civiles externes.</p>
+                  <p class="text-pale text-sm font-mono">» B.S.E</p>
+                  <p class="text-subtle text-xs mt-1">Le Bureau de Surveillance et d'Enquêtes</p>
                 </div>
               </div>
             </div>
@@ -1463,15 +1459,15 @@
             </div>
             <div class="wiki-content-body">
               <p class="tag-class mb-3">[PRÉSENTATION]</p>
-              <p class="text-ghost text-sm leading-relaxed mb-8">Le Département Scientifique est le cœur intellectuel de la Fondation Ayinvox. Il regroupe chercheurs, physiciens, biologistes et ingénieurs anomaliques dont la mission est de comprendre, documenter et si possible exploiter les propriétés des anomalies confinées pour le bénéfice de l'humanité.</p>
+              <p class="text-ghost text-sm leading-relaxed mb-8">Le Département Scientifique représente le pilier intellectuel de la Fondation SCP, dédié à l'étude méthodique et à la compréhension des phénomènes anormaux. Sa mission consiste à élaborer des protocoles de confinement optimisés, à analyser les propriétés physiques ou métaphysiques des objets récupérés et à mener des expérimentations rigoureuses pour repousser les limites de la connaissance humaine. En transformant l'inconnu en données exploitables, ce département fournit les solutions techniques nécessaires pour neutraliser les risques et assurer la sécurité de l'humanité face aux menaces qui défient les lois de la nature.</p>
 
               <p class="tag-class mb-3">[HIÉRARCHIE]</p>
               <div class="mb-8">
                 <div class="org-card">
                   <div class="org-acronym">Dir.</div>
                   <div class="org-info">
-                    <div class="org-name">Khao</div>
-                    <div class="org-role-desc">Directeur Scientifique — Zone-Ayin</div>
+                    <div class="org-name">Directeur des Recherches Locals</div>
+                    <div class="org-role-desc">...</div>
                   </div>
                   <div class="org-codes">
                     <div class="org-code-box badge-acc-4">
@@ -1513,24 +1509,24 @@
             </div>
             <div class="wiki-content-body">
               <p class="tag-class mb-3">[PRÉSENTATION]</p>
-              <p class="text-ghost text-sm leading-relaxed mb-8">Le Département Médical assure la prise en charge du personnel exposé aux anomalies, les soins d'urgence lors des brèches, et mène des recherches sur les effets biologiques et psychologiques des anomalies sur l'organisme humain. Il supervise également les protocoles de quarantaine post-exposition.</p>
+              <p class="text-ghost text-sm leading-relaxed mb-8">Le Département Médical assure la préservation de l'intégrité physique et mentale de l'ensemble du personnel de la Fondation SCP. Au-delà des soins d'urgence et de la médecine de routine, ce département est spécialisé dans le traitement des pathologies exotiques, des traumatismes psychologiques liés aux objets confinés et des risques de contamination biologique ou mémétique. En supervisant les examens de santé rigoureux et en développant des protocoles de décontamination avancés, il garantit que les agents et les chercheurs restent aptes à remplir leur mission malgré les dangers extrêmes auxquels ils sont exposés.</p>
 
               <p class="tag-class mb-3">[HIÉRARCHIE]</p>
               <div class="mb-8">
                 <div class="org-card">
                   <div class="org-acronym">Dir.</div>
                   <div class="org-info">
-                    <div class="org-name">[À pourvoir]</div>
-                    <div class="org-role-desc">Directeur Médical — Zone-Ayin</div>
+                    <div class="org-name">Directeur Médical</div>
+                    <div class="org-role-desc">...</div>
                   </div>
                   <div class="org-codes">
-                    <div class="org-code-box badge-acc-3">
+                    <div class="org-code-box badge-acc-4">
                       <span class="org-code-label">ACC</span>
-                      <span class="org-code-value">3</span>
+                      <span class="org-code-value">4</span>
                     </div>
-                    <div class="org-code-box badge-acc-3">
+                    <div class="org-code-box badge-acc-4">
                       <span class="org-code-label">N.A</span>
-                      <span class="org-code-value">3</span>
+                      <span class="org-code-value">4</span>
                     </div>
                   </div>
                 </div>
@@ -1554,16 +1550,16 @@
             </div>
           </div>
 
-          <!-- Administratif (anciennement Comité d'Éthique) -->
+          <!-- Administratif -->
           <div id="wiki-dept-admin" class="wiki-panel">
             <div class="wiki-section-header">
               <p class="wiki-breadcrumb">Départements <span>›</span> Administratif</p>
               <h1 class="font-mono font-bold text-2xl text-bright mt-2">Département Administratif</h1>
-              <p class="text-subtle text-sm mt-1">Supervision Morale des Opérations de la Fondation</p>
+              <p class="text-subtle text-sm mt-1">Gestion stratégique, bureaucratique et conformité réglementaire des opérations de la Fondation.</p>
             </div>
             <div class="wiki-content-body">
               <p class="tag-class mb-3">[PRÉSENTATION]</p>
-              <p class="text-ghost text-sm leading-relaxed mb-6">Le Département Administratif englobe le Comité d'Éthique, organe indépendant chargé de surveiller les pratiques de la Fondation Ayinvox afin de s'assurer qu'elles demeurent dans les limites morales définies par la Charte Fondatrice. Il détient un droit de veto sur toute expérience jugée contraire à l'éthique et peut saisir le Conseil des O5 en cas de dérive.</p>
+              <p class="text-ghost text-sm leading-relaxed mb-6">Le Département Administratif constitue le centre névralgique et décisionnel de la Fondation SCP, assurant la gestion stratégique, logistique et bureaucratique de l'ensemble de l'organisation. Il coordonne les ressources humaines, supervise les budgets colossaux et veille à l'application stricte des protocoles de sécurité à l'échelle mondiale. En centralisant la direction des opérations et la gestion des priorités, ce département garantit la cohésion entre les différentes unités scientifiques et tactiques, permettant à la Fondation de fonctionner comme une entité structurée, efficace et pérenne.</p>
               <div style="border: 1px solid #1a1a1a; padding: 20px; background: #0d0d0d; margin-bottom: 28px;">
                 <p class="tag-class mb-3" style="font-size:9px;">[MANDAT OFFICIEL]</p>
                 <p class="text-ghost text-sm leading-relaxed italic">"Sécuriser. Contenir. Protéger. Mais jamais au détriment de ce qui nous rend humains."</p>
@@ -1573,19 +1569,19 @@
               <p class="tag-class mb-3">[HIÉRARCHIE]</p>
               <div class="mb-8">
                 <div class="org-card">
-                  <div class="org-acronym">Prés.</div>
+                  <div class="org-acronym">Dir.</div>
                   <div class="org-info">
-                    <div class="org-name">[À pourvoir]</div>
-                    <div class="org-role-desc">Présidence du Comité d'Éthique</div>
+                    <div class="org-name">Directeur du Site</div>
+                    <div class="org-role-desc">...</div>
                   </div>
                   <div class="org-codes">
-                    <div class="org-code-box badge-acc-5">
+                    <div class="org-code-box badge-acc-4">
                       <span class="org-code-label">ACC</span>
-                      <span class="org-code-value">5</span>
+                      <span class="org-code-value">4</span>
                     </div>
-                    <div class="org-code-box badge-acc-5">
+                    <div class="org-code-box badge-acc-4">
                       <span class="org-code-label">N.A</span>
-                      <span class="org-code-value">5</span>
+                      <span class="org-code-value">4</span>
                     </div>
                   </div>
                 </div>
