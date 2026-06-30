@@ -874,6 +874,24 @@
           padding: 2px 6px; border-radius: 0;
         }
 
+        /* ─── Badges de Niveau de Menace ─── */
+        .badge-menace-blanc       { background: #1c1c1c; color: #e8e8e8; border: 1px solid #444; }
+        .badge-menace-bleu        { background: #0c1a2e; color: #5b9bd5; border: 1px solid #1d3a5e; }
+        .badge-menace-vert        { background: #0e2410; color: #5fb86b; border: 1px solid #1f4a24; }
+        .badge-menace-jaune       { background: #2e2a0c; color: #d6c44b; border: 1px solid #5a5018; }
+        .badge-menace-orange      { background: #2e1c0c; color: #e08a3e; border: 1px solid #5a3a18; }
+        .badge-menace-rouge       { background: #2e0c0c; color: #e0524a; border: 1px solid #5a1818; }
+        .badge-menace-noir        { background: #000000; color: #999999; border: 1px solid #444; }
+        .badge-menace-indetermine { background: #161616; color: #5a5a5a; border: 1px solid #2a2a2a; }
+
+        /* ─── Cases Accréditation / Niveau d'accès (0 à 5) ─── */
+        .badge-acc-0 { background: #1c1c1c; color: #f0f0f0; border: 1px solid #555; }
+        .badge-acc-1 { background: #0e2410; color: #5fb86b; border: 1px solid #1f4a24; }
+        .badge-acc-2 { background: #2e2a0c; color: #d6c44b; border: 1px solid #5a5018; }
+        .badge-acc-3 { background: #2e1c0c; color: #e08a3e; border: 1px solid #5a3a18; }
+        .badge-acc-4 { background: #2e0c0c; color: #e0524a; border: 1px solid #5a1818; }
+        .badge-acc-5 { background: #000000; color: #999999; border: 1px solid #444; }
+
         .scp-modal-overlay {
           display: none; position: fixed; inset: 0;
           background: rgba(0,0,0,.85); z-index: 200;
@@ -910,12 +928,12 @@
         /* ─── Modal SCP élargie pour la mise en page fiche ─── */
         #scp-modal-overlay .scp-modal { max-width: 860px; }
 
-        /* ─── Barre de statut (Confinement / Perturbation / Risque / Accréditation) ─── */
+        /* ─── Barre de statut (Confinement / Perturbation / Risque / Menace / Accréditation) ─── */
         .scp-status-bar {
-          display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+          display: grid; grid-template-columns: repeat(auto-fit, minmax(130px,1fr));
           border: 1px solid #1a1a1a; margin-bottom: 24px;
         }
-        .scp-status-item { padding: 14px 18px; border-right: 1px solid #1a1a1a; }
+        .scp-status-item { padding: 14px 16px; border-right: 1px solid #1a1a1a; }
         .scp-status-item:last-child { border-right: none; }
         .scp-status-value {
           font-family: 'JetBrains Mono', monospace; font-weight: 700;
@@ -927,6 +945,15 @@
         .stat-r     { color: #B56D6D; }
         .stat-o  { color: #B5956D; }
         .stat-b   { color: #776DB5; }
+        /* Couleurs menace pour la valeur texte dans la barre de statut */
+        .stat-menace-blanc       { color: #f0f0f0; }
+        .stat-menace-bleu        { color: #5b9bd5; }
+        .stat-menace-vert        { color: #5fb86b; }
+        .stat-menace-jaune       { color: #d6c44b; }
+        .stat-menace-orange      { color: #e08a3e; }
+        .stat-menace-rouge       { color: #e0524a; }
+        .stat-menace-noir        { color: #999999; }
+        .stat-menace-indetermine { color: #5a5a5a; }
 
         /* ─── Mise en page deux colonnes : image / texte ─── */
         .scp-layout { display: flex; gap: 28px; flex-wrap: wrap; }
@@ -990,20 +1017,46 @@
         #division-modal-overlay .scp-modal-header,
         #division-modal-overlay .scp-modal-body { position: relative; z-index: 1; }
 
+        /* ─── Nouvelle carte de poste (org-card) ─── */
         .org-card {
           border: 1px solid #1f1f1f; background: #0f0f0f;
-          padding: 14px 18px; margin-bottom: 8px;
-          display: flex; align-items: center; gap: 14px;
+          padding: 14px 16px; margin-bottom: 8px;
+          display: flex; align-items: center; gap: 16px;
           transition: border-color .2s;
         }
         .org-card:hover { border-color: #3a3a3a; }
-        .org-rank {
-          font-family: 'JetBrains Mono', monospace; font-size: 9px;
-          letter-spacing: .1em; text-transform: uppercase; color: #5a5a5a;
-          flex-shrink: 0; min-width: 80px;
+
+        .org-acronym {
+          font-family: 'JetBrains Mono', monospace; font-weight: 700;
+          font-size: 14px; color: #e8e8e8;
+          flex-shrink: 0; min-width: 46px; text-align: center;
+          border: 1px solid #2a2a2a; background: #161616;
+          padding: 8px 4px;
         }
-        .org-name { color: #e8e8e8; font-size: 13px; font-weight: 500; }
-        .org-dept { color: #5a5a5a; font-size: 11px; font-family: 'JetBrains Mono', monospace; }
+
+        .org-info { flex: 1; min-width: 0; }
+        .org-name { color: #e8e8e8; font-size: 13px; font-weight: 600; }
+        .org-role-desc {
+          color: #5a5a5a; font-size: 11px; font-family: 'Inter', sans-serif;
+          margin-top: 2px; line-height: 1.4;
+        }
+
+        .org-codes { display: flex; gap: 6px; flex-shrink: 0; }
+        .org-code-box {
+          display: flex; flex-direction: column; align-items: center; justify-content: center;
+          width: 54px; padding: 5px 4px;
+          font-family: 'JetBrains Mono', monospace;
+        }
+        .org-code-label {
+          font-size: 7px; letter-spacing: .06em; text-transform: uppercase;
+          opacity: .75; margin-bottom: 2px;
+        }
+        .org-code-value { font-size: 13px; font-weight: 700; }
+
+        @media (max-width: 560px) {
+          .org-card { flex-wrap: wrap; }
+          .org-codes { width: 100%; justify-content: flex-start; margin-top: 6px; }
+        }
 
         .wiki-section-header {
           border-bottom: 1px solid #1a1a1a; padding: 28px 32px 20px;
@@ -1245,7 +1298,7 @@
                     <span class="alert-dot" style="background:#0a0a0a; color:#888; border:1px solid #444;"></span>
                     <span class="alert-name">»  PRISME-7</span>
                   </div>
-                  <span class="alert-acc">ACC 1</pan>
+                  <span class="alert-acc">ACC 1</span>
                 </div>
                 <div class="alert-body">
                   <p><strong>Description :</strong> ...</p>
@@ -1292,6 +1345,7 @@
                         <th>Classe Confinement</th>
                         <th>Classe Risque</th>
                         <th>Perturbation</th>
+                        <th>Niveau de Menace</th>
                         <th>Accréditation</th>
                       </tr>
                     </thead>
@@ -1301,28 +1355,32 @@
                         <td><span class="badge badge-g">Safe</span></td>
                         <td><span class="badge badge-g">Notice</span></td>
                         <td><span class="badge badge-g">Dark</span></td>
-                        <td class="font-mono" style="font-size:11px;">Niveau 1</td>
+                        <td><span class="badge badge-menace-vert">Vert</span></td>
+                        <td><span class="badge badge-acc-1">1</span></td>
                       </tr>
                       <tr onclick="openScpModal('scp-131')">
                         <td class="font-mono text-pale">SCP-131</td>
                         <td><span class="badge badge-g">Safe</span></td>
                         <td><span class="badge badge-g">Notice</span></td>
                         <td><span class="badge badge-g">Dark</span></td>
-                        <td class="font-mono" style="font-size:11px;">Niveau 1</td>
+                        <td><span class="badge badge-menace-vert">Vert</span></td>
+                        <td><span class="badge badge-acc-1">1</span></td>
                       </tr>
                       <tr onclick="openScpModal('scp-2950')">
                         <td class="font-mono text-pale">SCP-2950</td>
                         <td><span class="badge badge-g">Safe</span></td>
                         <td><span class="badge badge-g">Notice</span></td>
                         <td><span class="badge badge-g">Dark</span></td>
-                        <td class="font-mono" style="font-size:11px;">Niveau 1</td>
+                        <td><span class="badge badge-menace-bleu">Bleu</span></td>
+                        <td><span class="badge badge-acc-1">1</span></td>
                       </tr>
                       <tr onclick="openScpModal('scp-093')">
                         <td class="font-mono text-pale">SCP-093</td>
                         <td><span class="badge badge-y">Euclid</span></td>
                         <td><span class="badge badge-o">Danger</span></td>
                         <td><span class="badge badge-y">Keneq</span></td>
-                        <td class="font-mono" style="font-size:11px;">Niveau 3</td>
+                        <td><span class="badge badge-menace-orange">Orange</span></td>
+                        <td><span class="badge badge-acc-3">3</span></td>
                       </tr>
                     </tbody>
                   </table>
@@ -1348,9 +1406,33 @@
 
               <p class="tag-class mb-3">[HIÉRARCHIE]</p>
               <div class="mb-8">
+                <!--
+                  ╔═══════════════════════════════════════════════════════════╗
+                  ║  CARTE DE POSTE — Structure réutilisable :                ║
+                  ║  org-acronym  = ex. "Cln." (Colonel), "Dir.", "Cdt."      ║
+                  ║  org-name     = nom du titulaire du poste                 ║
+                  ║  org-role-desc = courte description du rôle               ║
+                  ║  org-code-box "ACC" = niveau d'Accréditation (0-5)         ║
+                  ║  org-code-box "N.A" = Niveau d'Accès (0-5)                 ║
+                  ║  Couleurs : badge-acc-0 (Blanc) à badge-acc-5 (Noir)       ║
+                  ╚═══════════════════════════════════════════════════════════╝
+                -->
                 <div class="org-card">
-                  <div class="org-rank">Chef Modér.</div>
-                  <div><div class="org-name">Davlon "Fang"</div><div class="org-dept">Responsable du Département — Zone-Ayin</div></div>
+                  <div class="org-acronym">Cln.</div>
+                  <div class="org-info">
+                    <div class="org-name">Davlon "Fang"</div>
+                    <div class="org-role-desc">Directeur de la Sécurité — Zone-Ayin</div>
+                  </div>
+                  <div class="org-codes">
+                    <div class="org-code-box badge-acc-4">
+                      <span class="org-code-label">ACC</span>
+                      <span class="org-code-value">4</span>
+                    </div>
+                    <div class="org-code-box badge-acc-4">
+                      <span class="org-code-label">N.A</span>
+                      <span class="org-code-value">4</span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -1386,8 +1468,21 @@
               <p class="tag-class mb-3">[HIÉRARCHIE]</p>
               <div class="mb-8">
                 <div class="org-card">
-                  <div class="org-rank">Resp. Anim.</div>
-                  <div><div class="org-name">Khao</div><div class="org-dept">Responsable du Département — Zone-Ayin</div></div>
+                  <div class="org-acronym">Dir.</div>
+                  <div class="org-info">
+                    <div class="org-name">Khao</div>
+                    <div class="org-role-desc">Directeur Scientifique — Zone-Ayin</div>
+                  </div>
+                  <div class="org-codes">
+                    <div class="org-code-box badge-acc-4">
+                      <span class="org-code-label">ACC</span>
+                      <span class="org-code-value">4</span>
+                    </div>
+                    <div class="org-code-box badge-acc-4">
+                      <span class="org-code-label">N.A</span>
+                      <span class="org-code-value">4</span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -1423,8 +1518,21 @@
               <p class="tag-class mb-3">[HIÉRARCHIE]</p>
               <div class="mb-8">
                 <div class="org-card">
-                  <div class="org-rank">Direction</div>
-                  <div><div class="org-name">[À pourvoir]</div><div class="org-dept">Responsable du Département</div></div>
+                  <div class="org-acronym">Dir.</div>
+                  <div class="org-info">
+                    <div class="org-name">[À pourvoir]</div>
+                    <div class="org-role-desc">Directeur Médical — Zone-Ayin</div>
+                  </div>
+                  <div class="org-codes">
+                    <div class="org-code-box badge-acc-3">
+                      <span class="org-code-label">ACC</span>
+                      <span class="org-code-value">3</span>
+                    </div>
+                    <div class="org-code-box badge-acc-3">
+                      <span class="org-code-label">N.A</span>
+                      <span class="org-code-value">3</span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -1446,16 +1554,16 @@
             </div>
           </div>
 
-          <!-- Éthique -->
-          <div id="wiki-dept-ethique" class="wiki-panel">
+          <!-- Administratif (anciennement Comité d'Éthique) -->
+          <div id="wiki-dept-admin" class="wiki-panel">
             <div class="wiki-section-header">
-              <p class="wiki-breadcrumb">Départements <span>›</span> Comité d'Éthique</p>
-              <h1 class="font-mono font-bold text-2xl text-bright mt-2">Comité d'Éthique</h1>
+              <p class="wiki-breadcrumb">Départements <span>›</span> Administratif</p>
+              <h1 class="font-mono font-bold text-2xl text-bright mt-2">Département Administratif</h1>
               <p class="text-subtle text-sm mt-1">Supervision Morale des Opérations de la Fondation</p>
             </div>
             <div class="wiki-content-body">
               <p class="tag-class mb-3">[PRÉSENTATION]</p>
-              <p class="text-ghost text-sm leading-relaxed mb-6">Le Comité d'Éthique est l'organe indépendant chargé de surveiller les pratiques de la Fondation Ayinvox afin de s'assurer qu'elles demeurent dans les limites morales définies par la Charte Fondatrice. Il détient un droit de veto sur toute expérience jugée contraire à l'éthique et peut saisir le Conseil des O5 en cas de dérive.</p>
+              <p class="text-ghost text-sm leading-relaxed mb-6">Le Département Administratif englobe le Comité d'Éthique, organe indépendant chargé de surveiller les pratiques de la Fondation Ayinvox afin de s'assurer qu'elles demeurent dans les limites morales définies par la Charte Fondatrice. Il détient un droit de veto sur toute expérience jugée contraire à l'éthique et peut saisir le Conseil des O5 en cas de dérive.</p>
               <div style="border: 1px solid #1a1a1a; padding: 20px; background: #0d0d0d; margin-bottom: 28px;">
                 <p class="tag-class mb-3" style="font-size:9px;">[MANDAT OFFICIEL]</p>
                 <p class="text-ghost text-sm leading-relaxed italic">"Sécuriser. Contenir. Protéger. Mais jamais au détriment de ce qui nous rend humains."</p>
@@ -1465,8 +1573,21 @@
               <p class="tag-class mb-3">[HIÉRARCHIE]</p>
               <div class="mb-8">
                 <div class="org-card">
-                  <div class="org-rank">Présidence</div>
-                  <div><div class="org-name">[À pourvoir]</div><div class="org-dept">Présidence du Comité</div></div>
+                  <div class="org-acronym">Prés.</div>
+                  <div class="org-info">
+                    <div class="org-name">[À pourvoir]</div>
+                    <div class="org-role-desc">Présidence du Comité d'Éthique</div>
+                  </div>
+                  <div class="org-codes">
+                    <div class="org-code-box badge-acc-5">
+                      <span class="org-code-label">ACC</span>
+                      <span class="org-code-value">5</span>
+                    </div>
+                    <div class="org-code-box badge-acc-5">
+                      <span class="org-code-label">N.A</span>
+                      <span class="org-code-value">5</span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -1501,8 +1622,21 @@
               <p class="tag-class mb-3">[HIÉRARCHIE]</p>
               <div class="mb-8">
                 <div class="org-card">
-                  <div class="org-rank">Coordination</div>
-                  <div><div class="org-name">Conseil des O5</div><div class="org-dept">Supervision Générale des FIM</div></div>
+                  <div class="org-acronym">Coord.</div>
+                  <div class="org-info">
+                    <div class="org-name">Conseil des O5</div>
+                    <div class="org-role-desc">Supervision Générale des FIM</div>
+                  </div>
+                  <div class="org-codes">
+                    <div class="org-code-box badge-acc-5">
+                      <span class="org-code-label">ACC</span>
+                      <span class="org-code-value">5</span>
+                    </div>
+                    <div class="org-code-box badge-acc-5">
+                      <span class="org-code-label">N.A</span>
+                      <span class="org-code-value">5</span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -1690,7 +1824,6 @@
             <button class="scp-modal-close" onclick="closeScpModal()" aria-label="Fermer">✕</button>
           </div>
           <div class="scp-modal-body">
-            <!-- IMAGE DU SCP : si data.image est défini, une balise <img> sera insérée automatiquement ici -->
             <!-- BARRE DE STATUT -->
             <div class="scp-status-bar">
               <div class="scp-status-item">
@@ -1706,8 +1839,12 @@
                 <div id="modal-scp-risk" class="scp-status-value"></div>
               </div>
               <div class="scp-status-item">
+                <p class="scp-field-label">Niveau de Menace</p>
+                <div id="modal-scp-threat" class="scp-status-value"></div>
+              </div>
+              <div class="scp-status-item">
                 <p class="scp-field-label">Accréditation</p>
-                <div id="modal-scp-cred" class="scp-status-value stat-neutral"></div>
+                <div id="modal-scp-cred" class="scp-status-value"></div>
               </div>
             </div>
 
@@ -1768,6 +1905,8 @@
       <!-- ══ JAVASCRIPT WIKI ══ -->
       <script>
         // ─── Base de données SCP ───
+        // threat : 'blanc' | 'bleu' | 'vert' | 'jaune' | 'orange' | 'rouge' | 'noir' | 'indetermine'
+        // acc    : niveau d'accréditation de 0 à 5 (entier)
         const SCP_DATA = {
           'scp-999': {
             id: 'SCP-999',
@@ -1775,7 +1914,8 @@
             classe: { text: 'Safe', color: 'stat-g' },
             risk: { text: 'Notice', color: 'stat-g' },
             disrupt: { text: 'Dark', color: 'stat-g' },
-            cred: 'Niveau 1',
+            threat: 'vert',
+            acc: 1,
             image: '999.jfif', // ex: 'scp-001-ay.jpg'
             eventType: 'AUCUN',
             incidents: 0,
@@ -1786,13 +1926,56 @@
               '...',
             ]
           },
+          'scp-131': {
+            id: 'SCP-131',
+            name: '[Nom à compléter]',
+            classe: { text: 'Safe', color: 'stat-g' },
+            risk: { text: 'Notice', color: 'stat-g' },
+            disrupt: { text: 'Dark', color: 'stat-g' },
+            threat: 'vert',
+            acc: 1,
+            image: '',
+            eventType: 'AUCUN',
+            incidents: 0,
+            descPoints: ['...'],
+            containmentPoints: ['...']
+          },
+          'scp-2950': {
+            id: 'SCP-2950',
+            name: '[Nom à compléter]',
+            classe: { text: 'Safe', color: 'stat-g' },
+            risk: { text: 'Notice', color: 'stat-g' },
+            disrupt: { text: 'Dark', color: 'stat-g' },
+            threat: 'bleu',
+            acc: 1,
+            image: '',
+            eventType: 'AUCUN',
+            incidents: 0,
+            descPoints: ['...'],
+            containmentPoints: ['...']
+          },
+          'scp-093': {
+            id: 'SCP-093',
+            name: '[Nom à compléter]',
+            classe: { text: 'Euclid', color: 'stat-y' },
+            risk: { text: 'Danger', color: 'stat-o' },
+            disrupt: { text: 'Keneq', color: 'stat-y' },
+            threat: 'orange',
+            acc: 3,
+            image: '',
+            eventType: 'AUCUN',
+            incidents: 0,
+            descPoints: ['...'],
+            containmentPoints: ['...']
+          },
           'scp-ayin-002': {
             id: 'SCP-002-AY',
             name: 'Le Miroir de Voss',
-            classe: { text: 'Euclide', color: 'stat-euclid' },
-            risk: { text: 'Modéré', color: 'stat-euclid' },
-            disrupt: { text: 'Vlam', color: 'stat-euclid' },
-            cred: 'Niveau 3',
+            classe: { text: 'Euclide', color: 'stat-y' },
+            risk: { text: 'Modéré', color: 'stat-y' },
+            disrupt: { text: 'Vlam', color: 'stat-y' },
+            threat: 'jaune',
+            acc: 3,
             image: '',
             eventType: 'AUCUN',
             incidents: 1,
@@ -1809,10 +1992,11 @@
           'scp-ayin-003': {
             id: 'SCP-003-AY',
             name: 'Carnet de Notes Infini',
-            classe: { text: 'Safe', color: 'stat-safe' },
-            risk: { text: 'Faible', color: 'stat-safe' },
-            disrupt: { text: 'Ehbi', color: 'stat-safe' },
-            cred: 'Niveau 2',
+            classe: { text: 'Safe', color: 'stat-g' },
+            risk: { text: 'Faible', color: 'stat-g' },
+            disrupt: { text: 'Ehbi', color: 'stat-g' },
+            threat: 'vert',
+            acc: 2,
             image: '',
             eventType: 'AUCUN',
             incidents: 0,
@@ -1829,10 +2013,11 @@
           'scp-ayin-004': {
             id: 'SCP-004-AY',
             name: '[DONNÉES EXPURGÉES]',
-            classe: { text: 'Keter', color: 'stat-keter' },
-            risk: { text: 'Extrême', color: 'stat-keter' },
-            disrupt: { text: 'Amida', color: 'stat-keter' },
-            cred: 'Niveau 5',
+            classe: { text: 'Keter', color: 'stat-r' },
+            risk: { text: 'Extrême', color: 'stat-r' },
+            disrupt: { text: 'Amida', color: 'stat-r' },
+            threat: 'noir',
+            acc: 5,
             image: '',
             eventType: '[CLASSIFIÉ]',
             incidents: 0,
@@ -1910,6 +2095,18 @@
           'ic-delta':     { name: 'Commandement Delta', image:'', presentation: 'Structure de commandement militaire de l\'Insurrection. Coordonne les opérations de raid sur les installations, les sabotages et les tentatives d\'extraction d\'anomalies.', mission: 'Planifier et exécuter les opérations militaires contre la Fondation.', hierarchy: [] }
         };
 
+        // ─── Libellés affichés pour le Niveau de Menace ───
+        const THREAT_LABELS = {
+          blanc: 'Blanc',
+          bleu: 'Bleu',
+          vert: 'Vert',
+          jaune: 'Jaune',
+          orange: 'Orange',
+          rouge: 'Rouge',
+          noir: 'Noir',
+          indetermine: 'Indéterminé'
+        };
+
         // ─── Ouvrir le modal SCP ───
         function openScpModal(scpId) {
           const d = SCP_DATA[scpId];
@@ -1925,7 +2122,22 @@
           setStat('modal-scp-class', d.classe);
           setStat('modal-scp-risk', d.risk);
           setStat('modal-scp-disrupt', d.disrupt);
-          document.getElementById('modal-scp-cred').textContent = d.cred;
+
+          // Niveau de Menace
+          const threatKey = d.threat || 'indetermine';
+          const threatEl = document.getElementById('modal-scp-threat');
+          threatEl.textContent = THREAT_LABELS[threatKey] || 'Indéterminé';
+          threatEl.className = 'scp-status-value stat-menace-' + threatKey;
+
+          // Accréditation (case colorée selon le niveau 0-5)
+          const accLevel = (d.acc !== undefined) ? d.acc : 0;
+          const credEl = document.getElementById('modal-scp-cred');
+          credEl.textContent = 'Niveau ' + accLevel;
+          credEl.className = 'scp-status-value';
+          credEl.style.color = '';
+          // on applique la couleur via la classe badge-acc-X reprise en tant que couleur de texte
+          const accColors = { 0:'#f0f0f0', 1:'#5fb86b', 2:'#d6c44b', 3:'#e08a3e', 4:'#e0524a', 5:'#999999' };
+          credEl.style.color = accColors[accLevel] || '#c0c0c0';
 
           document.getElementById('modal-scp-caption').textContent = 'Fig. 1 — ' + d.id;
           document.getElementById('modal-scp-event-type').textContent = d.eventType || 'AUCUN';
@@ -1980,8 +2192,8 @@
             hierWrap.style.display = '';
             hierBox.innerHTML = d.hierarchy.map(h => `
               <div class="org-card">
-                <div class="org-rank">${h.rank}</div>
-                <div><div class="org-name">${h.name}</div><div class="org-dept">${h.dept}</div></div>
+                <div class="org-acronym">${h.rank}</div>
+                <div class="org-info"><div class="org-name">${h.name}</div><div class="org-role-desc">${h.dept}</div></div>
               </div>
             `).join('');
           } else {
