@@ -342,6 +342,27 @@
   color: #e8e8e8;
   background: #161616;
 }
+
+/* ─── Point de statut animé (wiki) ─── */
+.status-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+  animation: statusPulse 1.6s ease-in-out infinite;
+}
+.status-dot.online {
+  background: #4ade80;
+  box-shadow: 0 0 6px rgba(74,222,128,0.7);
+}
+.status-dot.maintenance {
+  background: #fb923c;
+  box-shadow: 0 0 6px rgba(251,146,60,0.7);
+}
+@keyframes statusPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.35; transform: scale(0.75); }
+}
   </style>
 </head>
 
@@ -810,22 +831,77 @@
          PAGE : WIKI
          ═══════════════════════════════════════════════════════ -->
     <section id="page-wiki" class="page-section hidden">
-      <div class="min-h-screen flex flex-col items-center justify-center px-6 py-24">
-        <div class="text-center max-w-md mx-auto">
-          <div class="flex justify-center mb-8">
-            <!-- Engrenage animé -->
-            <div class="w-16 h-16 border border-border flex items-center justify-center maintenance-gear">
-              <i data-lucide="settings" class="w-8 h-8 text-muted"></i>
-            </div>
-          </div>
-          <p class="tag-class mb-4">[WIKI SCP — STATUT : MAINTENANCE]</p>
-          <h2 class="font-mono font-semibold text-2xl text-pale mb-4">En cours de développement...</h2>
-          <p class="text-subtle text-sm mb-8 leading-relaxed">
-            Le Wiki SCP d'Ayinvox Studio est Hors Ligne pour le moment. La V2 arrive très bientôt...
+      <div class="max-w-4xl mx-auto px-6 py-24">
+
+        <!-- En-tête -->
+        <div class="mb-16">
+          <p class="tag-class mb-3">[ARCHIVES — ACCÈS DOCUMENTATION]</p>
+          <h1 class="font-mono font-bold text-3xl sm:text-4xl text-bright mb-4">Wiki</h1>
+          <p class="text-subtle max-w-xl">
+            Retrouvez ci-dessous les wikis officiels du studio Ayinvox.
           </p>
-          <span class="btn-outline" onclick="showPage('home')">
-            <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Retour à l'accueil
-          </span>
+        </div>
+
+        <hr class="section-divider mb-16" />
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+          <!-- Wiki SCP -->
+          <a href="#" target="_blank" rel="noopener" class="contact-card p-8 block group">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="w-10 h-10 border border-border flex items-center justify-center group-hover:border-muted transition-colors">
+                <!--
+                  ╔══════════════════════════════════════════════════════╗
+                  ║  LOGO — Remplace ce commentaire par :                ║
+                  ║  <img src="ton-logo-scp.png" class="w-6 h-6 object-contain"> ║
+                  ╚══════════════════════════════════════════════════════╝
+                -->
+              </div>
+              <div>
+                <p class="tag-class mb-0.5">[ARCHIVE 01]</p>
+                <span class="font-mono text-xs text-pale uppercase tracking-wider">Wiki SCP</span>
+                <div class="flex items-center gap-2 mt-1.5">
+                  <span class="status-dot maintenance"></span>
+                  <span class="font-mono text-[10px] uppercase tracking-wider" style="color:#fb923c;">En Maintenance..</span>
+                </div>
+              </div>
+            </div>
+            <p class="font-mono text-sm text-ghost mb-1">Documentation officielle — Fondation SCP</p>
+            <p class="font-mono text-xs text-subtle break-all">Accéder au wiki</p>
+            <div class="flex items-center gap-2 mt-6 text-subtle group-hover:text-ghost transition-colors">
+              <span class="font-mono text-xs uppercase tracking-wider">Consulter</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </div>
+          </a>
+
+          <!-- Wiki Backrooms -->
+          <a href="#" target="_blank" rel="noopener" class="contact-card p-8 block group">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="w-10 h-10 border border-border flex items-center justify-center group-hover:border-muted transition-colors">
+                <!--
+                  ╔══════════════════════════════════════════════════════╗
+                  ║  LOGO — Remplace ce commentaire par :                ║
+                  ║  <img src="ton-logo-backrooms.png" class="w-6 h-6 object-contain"> ║
+                  ╚══════════════════════════════════════════════════════╝
+                -->
+              </div>
+              <div>
+                <p class="tag-class mb-0.5">[ARCHIVE 02]</p>
+                <span class="font-mono text-xs text-pale uppercase tracking-wider">Wiki Backrooms</span>
+                <div class="flex items-center gap-2 mt-1.5">
+                  <span class="status-dot maintenance"></span>
+                  <span class="font-mono text-[10px] uppercase tracking-wider" style="color:#fb923c;">En Maintenance..</span>
+                </div>
+              </div>
+            </div>
+            <p class="font-mono text-sm text-ghost mb-1">Documentation officielle — Backrooms</p>
+            <p class="font-mono text-xs text-subtle break-all">Accéder au wiki</p>
+            <div class="flex items-center gap-2 mt-6 text-subtle group-hover:text-ghost transition-colors">
+              <span class="font-mono text-xs uppercase tracking-wider">Consulter</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </div>
+          </a>
+
         </div>
       </div>
     </section>
